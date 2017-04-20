@@ -5,7 +5,7 @@
     <meta charset=utf-8 name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<!-- http://stackoverflow.com/a/3449338/4047679 -->
 	  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Bikeways for Everybody!</title>
+    <title>Freight coordiors survey</title>
 <!--      Mapbox-->
     <script src="js/leaflet.js"></script>
     <link rel="stylesheet" href="css/leaflet.css"  />
@@ -45,9 +45,9 @@
       <form>
         <fieldset style="border: none;">
           <ul style="list-style-type: none; padding-left: 0px">
-            <li><label for="username">Please Enter Your First Name</label></li>
+            <li><label for="username">RPO</label></li>
             <li><input type="text" name="username" id="username" placeholder="Enter your name" pattern="[A-Za-z]{3,}" title="Your first name must be at least 3 letters" class="text ui-widget-content ui-corner-all" required></li>
-            <li><label for="zipcode">Please Enter Your Zipcode</label></li>
+            <li><label for="zipcode">Password</label></li>
             <li><input type="text" name="zipcode" maxlength="5" pattern="[0-9]{5}" id="zipcode" title="Please enter a 5 digit zip-code" placeholder="02134" class="text ui-widget-content ui-corner-all" required></li>
           </ul>
         </fieldset>
@@ -578,7 +578,7 @@
         layerOrder[layerOrder.length] = json_bikefacilitiesJSON;
         feature_group.addLayer(json_bikefacilitiesJSON);
 
-       L.control.layers({},{'<b>Bike Facilities</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Offstreet.png" /> Offstreet<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Cycletrack.png" /> Cycletrack<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Buffered.png" /> Buffered<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Bikelane.png" /> Bikelane<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Sharrow.png" /> Sharrow<br />': json_bikefacilitiesJSON},{collapsed:false}).addTo(map);
+    //    L.control.layers({},{'<b>Bike Facilities</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Offstreet.png" /> Offstreet<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Cycletrack.png" /> Cycletrack<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Buffered.png" /> Buffered<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Bikelane.png" /> Bikelane<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Sharrow.png" /> Sharrow<br />': json_bikefacilitiesJSON},{collapsed:false}).addTo(map);
 
 		L.control.scale({options: {position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}}).addTo(map);
         $(".leaflet-left .leaflet-control-scale").css({"display": "inline-block","float": "none"});
