@@ -1,6 +1,5 @@
 /*  QGIS layer*/
-  var layerOrder = new Array();
-  var feature_group = new L.featureGroup([]);
+
 
 
   function doStylebikefacilities(feature) {
@@ -50,10 +49,12 @@
               }
           }
   }
-      var json_bikefacilitiesJSON = new L.geoJson(json_bikefacilitiesexp, {
+      var json_bikefacilitiesJSON = new L.geoJson(json_bikefacilities, {
           style: doStylebikefacilities
           ,clickable :false
           ,pane: 'shadowPane'
       });
   layerOrder[layerOrder.length] = json_bikefacilitiesJSON;
   feature_group.addLayer(json_bikefacilitiesJSON);
+
+         L.control.layers({},{'<b>Bike Facilities</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Offstreet.png" /> Offstreet<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Cycletrack.png" /> Cycletrack<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Buffered.png" /> Buffered<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Bikelane.png" /> Bikelane<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Sharrow.png" /> Sharrow<br />': json_bikefacilitiesJSON},{collapsed:false}).addTo(map);
