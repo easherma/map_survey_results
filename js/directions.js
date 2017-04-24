@@ -31,7 +31,7 @@ function stopRouteDraw(){
 	$("#add-route").removeClass('icon-click');
 	$("#map").removeClass("pointing");
 }
-/* Adds a marker to the current route 
+/* Adds a marker to the current route
  * If a marker is clicked (simulates a double click) the route is ended
  */
 function addMarker(evt) {
@@ -39,22 +39,22 @@ function addMarker(evt) {
 	//From http://stackoverflow.com/a/28610565/4047679
 	if (lastClick >= (Date.now() - 20))
     	return;
-	
+
 	lastClick = Date.now();
-	
+
     if (currentLine === null) {
 	}
 	else if (currentLine !== null) {
 
 		var marker = new L.marker(evt.latlng, { draggable:true, icon:circleIcon });
-		
+
 		marker.on('dragend', function() {
 			drawRoute(currentLine);
 		});
 		drawnRoute.addLayer(marker);
 		currentLine.waypoints.push(marker);
 		drawRoute(currentLine);
-        
+
         if(currentLine.waypoints.length >= 1){
             routeDrawTooltip.updateContent({text:"Click to add a another point to your route"});
         }
@@ -66,7 +66,7 @@ function addMarker(evt) {
 //			marker.on('click', endLine);
 			marker.on("dblclick", endLine);
 //			marker.on('contextmenu', endLine);
-//			map.on('contextmenu', endLine);		
+//			map.on('contextmenu', endLine);
 			$("#save").show();
 			$("#save").css({'display':'inline-block'});
 		}
@@ -76,10 +76,10 @@ function addMarker(evt) {
 
 
 function _onMouseMove (e) {
-	var latlng = e.latlng;	
+	var latlng = e.latlng;
 	routeDrawTooltip.updatePosition(latlng);
 }
-        
+
 
 /* Draws the route between a given set of waypoints
  * If there are at least 2 points then a request is sent to the directions api
@@ -94,7 +94,7 @@ function drawRoute(routeToDraw) {
 
 		for (i = 0; i < routeToDraw.waypoints.length - 1; i++) {
 			var lat = routeToDraw.waypoints[i].getLatLng().lat;
-			var lng = routeToDraw.waypoints[i].getLatLng().lng;		
+			var lng = routeToDraw.waypoints[i].getLatLng().lng;
 			waypointsString += lng + "," + lat + ";";
 	  	}
 	  	//accounts for omitting semi-colon
@@ -103,13 +103,15 @@ function drawRoute(routeToDraw) {
 
 	  	waypointsString += lastLng + "," + lastLat;
 
-		var directionUrl = 'https://api.mapbox.com/v4/directions/mapbox.walking/'+ waypointsString + '.json?access_token='+config.mapboxAccessToken;
+		var directionUrl = 'https://api.mapbox.com/v4/directions/mapbox.driving/'+ waypointsString + '.json?access_token='+config.mapboxAccessToken;
 
 		routeDict[routeToDraw.id].directionUrl = directionUrl;
 
 		$.when($.get(directionUrl)
 		).done( function (result) {
 			var route = result.routes[0].geometry.coordinates;
+            //distance in miles
+            console.log(result.routes[0].distance/1609.344);
 
 			routeDict[routeToDraw.id].coordinates = route;
 			pointsToDraw = route.map( function(coordinate) {

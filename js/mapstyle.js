@@ -73,12 +73,40 @@ onEachFeature: function (feature, layer) {
 }
 }).addTo(map);
 
-var coolPlaces = new L.LayerGroup();
+var boundaries = new L.LayerGroup();
+
+//L.geoJSON(counties).addTo(boundaries);
+
+
+  // L.esri.basemapLayer("Topographic").addTo(map);
+L.esri.featureLayer({
+url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_boundaries/MapServer/7',
+opacity: 0.7,
+useCors: false,
+layers: [7]
+}).addTo(boundaries);
+
+L.esri.featureLayer({
+url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_designatedtruckroutes/MapServer',
+opacity: 0.7,
+useCors: false,
+layers: [0,1,2,3,4]
+}).addTo(boundaries);
+
 var overlays = {
-	"Interesting places": coolPlaces
+	"counties": boundaries
+
 };
 
-L.control.layers({}, overlays, {collapsed:false}).addTo(map);
+
+
+boundaries.addTo(map);
+
+
+
+var layerControl = new L.control.layers({}, overlays, {collapsed:false}).addTo(map);
+layerControl.addTo(map);
+
 
 // L.control.layers({},{'<b>Bike Facilities</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Offstreet.png" /> Offstreet<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Cycletrack.png" /> Cycletrack<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Buffered.png" /> Buffered<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Bikelane.png" /> Bikelane<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Sharrow.png" /> Sharrow<br />': json_bikefacilitiesJSON},{collapsed:false}).addTo(map);
 
