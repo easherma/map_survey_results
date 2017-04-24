@@ -75,26 +75,33 @@ onEachFeature: function (feature, layer) {
 
 var boundaries = new L.LayerGroup();
 
-//L.geoJSON(counties).addTo(boundaries);
+var gai = new L.LayerGroup();
+
+L.geoJSON(counties).addTo(boundaries);
 
 
   // L.esri.basemapLayer("Topographic").addTo(map);
-L.esri.featureLayer({
-url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_boundaries/MapServer/7',
-opacity: 0.7,
-useCors: false,
-layers: [7]
-}).addTo(boundaries);
+// L.esri.featureLayer({
+// url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_boundaries/MapServer/5',
+// opacity: 0.7,
+// useCors: false,
+// simplifyFactor: 1,
+// precision: 5,
+// layers: [5]
+// }).addTo(gai);
 
 L.esri.featureLayer({
-url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_designatedtruckroutes/MapServer',
+url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_designatedtruckroutes/MapServer/2',
 opacity: 0.7,
 useCors: false,
+simplifyFactor: 1,
+precision: 5,
 layers: [0,1,2,3,4]
-}).addTo(boundaries);
+}).addTo(gai);
 
 var overlays = {
-	"counties": boundaries
+	"counties": boundaries,
+    "gai features": gai
 
 };
 
