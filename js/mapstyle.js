@@ -111,13 +111,10 @@ layers: [0,1]
 }).addTo(counts);
 
 var overlays = {
-	"counties": boundaries,
-    "gai features": gai,
-    "counts": counts
-
+"counties": boundaries,
+"gai features": gai,
+"counts": counts
 };
-
-
 
 boundaries.addTo(map);
 
