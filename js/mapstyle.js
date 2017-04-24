@@ -108,6 +108,7 @@ useCors: false,
 simplifyFactor: 1,
 precision: 5,
 layers: [0,1]
+}).addTo(counts);
 
 var overlays = {
 	"counties": boundaries,
