@@ -77,6 +77,8 @@ var boundaries = new L.LayerGroup();
 
 var gai = new L.LayerGroup();
 
+var counts = new L.LayerGroup();
+
 L.geoJSON(counties).addTo(boundaries);
 
 
@@ -99,9 +101,18 @@ precision: 5,
 layers: [0,1,2,3,4]
 }).addTo(gai);
 
+L.esri.dynamicMapLayer({
+url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_trafficCount/MapServer/',
+opacity: 0.7,
+useCors: false,
+simplifyFactor: 1,
+precision: 5,
+layers: [0,1]
+
 var overlays = {
 	"counties": boundaries,
-    "gai features": gai
+    "gai features": gai,
+    "counts": counts
 
 };
 
