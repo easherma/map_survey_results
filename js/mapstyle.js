@@ -75,11 +75,17 @@ onEachFeature: function (feature, layer) {
 
 var boundaries = new L.LayerGroup();
 
+var urban = new L.LayerGroup();
+
 var gai = new L.LayerGroup();
 
 var counts = new L.LayerGroup();
 
+var freight = new L.LayerGroup();
+
 L.geoJSON(counties).addTo(boundaries);
+
+L.geoJSON(nhfn).addTo(freight);
 
 
   // L.esri.basemapLayer("Topographic").addTo(map);
@@ -92,14 +98,23 @@ L.geoJSON(counties).addTo(boundaries);
 // layers: [5]
 // }).addTo(gai);
 
-L.esri.featureLayer({
-url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_designatedtruckroutes/MapServer/2',
-opacity: 0.7,
-useCors: false,
-simplifyFactor: 1,
-precision: 5,
-layers: [0,1,2,3,4]
-}).addTo(gai);
+// L.esri.featureLayer({
+// url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_designatedtruckroutes/MapServer/2',
+// opacity: 0.7,
+// useCors: false,
+// simplifyFactor: 1,
+// precision: 5,
+// layers: [0,1,2,3,4]
+// }).addTo(gai);
+
+// L.esri.featureLayer({
+// url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_functionalclass/MapServer',
+// opacity: 0.7,
+// useCors: false,
+// simplifyFactor: 1,
+// precision: 5,
+// layers: [1]
+// }).addTo(gai);
 
 L.esri.dynamicMapLayer({
 url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_trafficCount/MapServer/',
@@ -112,12 +127,35 @@ layers: [0,1]
 
 var overlays = {
 "counties": boundaries,
-"gai features": gai,
-"counts": counts
+// "gai features": gai,
+// "counts": counts,
+"urban": urban,
+"nhfn": freight
 };
 
-boundaries.addTo(map);
+// boundaries.addTo(map);
 
+// freight.addTo(map);
+
+var urban = L.esri.dynamicMapLayer({
+    url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/UrbanizedAreas/MapServer',
+    useCors: false
+}).addTo(urban);
+
+var urban = L.esri.dynamicMapLayer({
+    url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_functionalclass/MapServer/1',
+    useCors: false
+}).addTo(gai);
+// L.esri.legendControl(ports).addTo(map);
+
+// var urban = L.esri.featureLayer({
+// url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/UrbanizedAreas/MapServer',
+// opacity: 0.7,
+// useCors: false,
+// simplifyFactor: 1,
+// precision: 5,
+// layers: [0]
+// }).addTo(map);
 
 
 var layerControl = new L.control.layers({}, overlays, {collapsed:false}).addTo(map);
