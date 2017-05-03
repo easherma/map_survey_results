@@ -1,4 +1,30 @@
 /*  QGIS layer*/
+
+//generic code to append all attributes of a feature to a pop-up
+
+function onEachFeature(feature, layer) {
+    // if (feature.properties && feature.properties.name)
+    {
+        var popupContent = '<table>';
+        for (var p in feature.properties) {
+            popupContent += '<tr><td>' + p + ':</td><td><b>' + feature.properties[p] + '</b></td></tr>';
+        }
+        popupContent += '</table>';
+        layer.bindPopup(popupContent);
+    }
+}
+
+function onEachFeatureFreight(feature, layer) {
+    // if (feature.properties && feature.properties.name)
+    {
+        var popupContent = '<table>';
+
+            popupContent += '<tr><td>' + "AADTT" + ':</td><td><b>' + feature.properties['AADTT'] + '</b></td></tr>';
+        popupContent += '</table>';
+        layer.bindPopup(popupContent);
+    }
+}
+
   var layerOrder = new Array();
   var feature_group = new L.featureGroup([]);
 
@@ -21,11 +47,32 @@
       }
   }
 
+  // L.geoJson(nhfn, {
+  //     onEachFeature: onEachFeature,
+  //     style: styleNhfn
+  // }).addTo(map);
+var selected
+
   var freightStyle = new L.geoJson(nhfn, {
-      style: styleNhfn
-      ,clickable :false
-      ,pane: 'shadowPane'
-  });
+      style: styleNhfn,
+      onEachFeature: onEachFeatureFreight,
+      clickable :false,
+      pane: 'shadowPane'
+  }).on('click', function (e) {
+      // Check for selected
+      if (selected) {
+        // Reset selected to default style
+        e.target.resetStyle(selected)
+      }
+      // Assign new selected
+      selected = e.layer
+      // Bring selected to front
+      selected.bringToFront()
+      // Style selected
+      selected.setStyle({
+        'color': 'red'
+      })
+    });
 layerOrder[layerOrder.length] = freightStyle;
 feature_group.addLayer(freightStyle);
 

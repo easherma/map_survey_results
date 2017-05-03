@@ -1,6 +1,3 @@
-
-
-
             //Empty to store drawn routes after they are submitted
         var submittedRoutes = new L.geoJson(false, {
             onEachFeature: function (feature, layer) {

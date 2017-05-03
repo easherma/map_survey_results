@@ -90,6 +90,8 @@ var freight = new L.LayerGroup();
 
 var intermodal_legend = new L.LayerGroup();
 
+var submissions = new L.LayerGroup();
+
 // L.geoJSON(counties).addTo(boundaries);
 
 // L.geoJSON(nhfn).addTo(freight);
@@ -141,7 +143,8 @@ var overlays = {
 // "counts": counts,
 "urban": urban,
 "nhfn": freightStyle,
-"intermodal": intermodal_legend
+"intermodal": intermodal_legend,
+"submissions": submissions
 };
 
 // boundaries.addTo(map);
@@ -171,11 +174,11 @@ var urban = L.esri.dynamicMapLayer({
 // }).addTo(map);
 
 
+
+
 var layerControl = new L.control.layers({}, overlays, {collapsed:false}).addTo(map);
 layerControl.addTo(map);
 
-
-// L.control.layers({},{'<b>Bike Facilities</b><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Offstreet.png" /> Offstreet<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Cycletrack.png" /> Cycletrack<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Buffered.png" /> Buffered<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Bikelane.png" /> Bikelane<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/legend/bikefacilities_Sharrow.png" /> Sharrow<br />': json_bikefacilitiesJSON},{collapsed:false}).addTo(map);
 
 		L.control.scale({options: {position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}}).addTo(map);
         $(".leaflet-left .leaflet-control-scale").css({"display": "inline-block","float": "none"});
