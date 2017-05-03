@@ -19,7 +19,12 @@ function restackLayers() {
 		var bounds = L.latLngBounds(L.latLng(config.south,config.west), L.latLng(config.north,config.east));
         var map = L.map('map', {
             center: config.mapFocus,
-            zoom: 7, minZoom : 7, maxzoom: 19, maxBounds : bounds, zoomControl :false });
+            zoom: 7,
+            minZoom : 7,
+            maxzoom: 19,
+            maxBounds : (bounds.pad(1)),
+            zoomControl :false
+        });
         map.touchZoom.enable();
         L.control.zoom({position : 'bottomleft'}).addTo(map);
 
@@ -83,9 +88,11 @@ var counts = new L.LayerGroup();
 
 var freight = new L.LayerGroup();
 
-L.geoJSON(counties).addTo(boundaries);
+var intermodal_legend = new L.LayerGroup();
 
-L.geoJSON(nhfn).addTo(freight);
+// L.geoJSON(counties).addTo(boundaries);
+
+// L.geoJSON(nhfn).addTo(freight);
 
 
   // L.esri.basemapLayer("Topographic").addTo(map);
@@ -107,30 +114,34 @@ L.geoJSON(nhfn).addTo(freight);
 // layers: [0,1,2,3,4]
 // }).addTo(gai);
 
-// L.esri.featureLayer({
-// url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_functionalclass/MapServer',
-// opacity: 0.7,
-// useCors: false,
-// simplifyFactor: 1,
-// precision: 5,
-// layers: [1]
-// }).addTo(gai);
+var intermodal = L.esri.featureLayer({
+url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/IntermodalFreightFacilities/MapServer/0',
+where: "STATE='IL'",
+pane: 'shadowPane'
+}).addTo(intermodal_legend);
+
+var intermodalPopup = "<p>{NAME}<br></p><table><tr><th>Type</th><th>Mode Type</th><th>Association</th></tr><tr><td>{TYPE}</td><td>{MODE_TYPE}</td><td>{ASSOC}</td></tr></table>"
+intermodal.bindPopup(function (layer) {
+  return L.Util.template(intermodalPopup, layer.feature.properties);
+});
 
 L.esri.dynamicMapLayer({
 url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_trafficCount/MapServer/',
 opacity: 0.7,
 useCors: false,
 simplifyFactor: 1,
+
 precision: 5,
 layers: [0,1]
 }).addTo(counts);
 
 var overlays = {
-"counties": boundaries,
+"counties": countiesStyle,
 // "gai features": gai,
 // "counts": counts,
 "urban": urban,
-"nhfn": freight
+"nhfn": freightStyle,
+"intermodal": intermodal_legend
 };
 
 // boundaries.addTo(map);
@@ -139,13 +150,15 @@ var overlays = {
 
 var urban = L.esri.dynamicMapLayer({
     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/UrbanizedAreas/MapServer',
-    useCors: false
+    useCors: false,
+    layerDefs: {0: "STFIPS1='17'"}
 }).addTo(urban);
 
-var urban = L.esri.dynamicMapLayer({
-    url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_functionalclass/MapServer/1',
-    useCors: false
-}).addTo(gai);
+// var urban = L.esri.dynamicMapLayer({
+//     url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_functionalclass/MapServer/1',
+//     useCors: false
+// }).addTo(gai);
+
 // L.esri.legendControl(ports).addTo(map);
 
 // var urban = L.esri.featureLayer({
