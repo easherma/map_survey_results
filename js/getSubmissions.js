@@ -30,9 +30,11 @@ var sql_statement='select * from bikeways';
     success: function(responseData, textStatus, jqXHR) {
       console.log("Data retrived");
       console.log(responseData);
-      L.geoJson(responseData, {
+      var submissionsStyle = L.geoJson(responseData, {
           onEachFeature: onEachFeature
-      }).addTo(submissions);
+      })
+      layerOrder[layerOrder.length] = submissionsStyle;
+      feature_group.addLayer(submissionsStyle).addTo(submissions);
 
     },
     error: function (responseData, textStatus, errorThrown) {
