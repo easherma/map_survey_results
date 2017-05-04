@@ -28,6 +28,7 @@ function onEachFeatureFreight(feature, layer) {
     }
 }
 
+
   var layerOrder = new Array();
   var feature_group = new L.featureGroup([]);
 
@@ -50,10 +51,12 @@ function onEachFeatureFreight(feature, layer) {
       }
   }
 
-  // L.geoJson(nhfn, {
-  //     onEachFeature: onEachFeature,
-  //     style: styleNhfn
-  // }).addTo(map);
+  var intermodalStyle = L.geoJson(intermodal_conn, {
+      onEachFeature: onEachFeature
+  })
+
+  layerOrder[layerOrder.length] = intermodalStyle;
+  feature_group.addLayer(intermodalStyle);
 var selected
 
   var freightStyle = new L.geoJson(nhfn, {

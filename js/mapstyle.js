@@ -143,7 +143,8 @@ var overlays = {
 // "counts": counts,
 "urban": urban,
 "nhfn": freightStyle,
-"intermodal": intermodal_legend,
+"intermmodal connectors": intermodalStyle,
+"intermodal facilities": intermodal_legend,
 "submissions": submissions
 };
 
