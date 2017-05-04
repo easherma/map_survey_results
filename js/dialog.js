@@ -1,8 +1,8 @@
 //Dialog of global user variables
 dialogGlobal = $( "#dialogGlobal" ).dialog({
       autoOpen: false,
-      height: 300,
-      width: 350,
+      height: 550,
+      width: 450,
       modal: true,
     position: {
         my: "center center",
@@ -164,8 +164,8 @@ var tourSubmitFunc = function(e,v,m,f){
 },
 tourStates = [
    {
-        title: "Welcome",
-       html: config.walkthroughWelcome,
+       title: "Welcome!",
+       html:  "<div class = 'img-container' style='width:50%;height:50%;' ><img src='img/IDOT.jpg' style='width:90%;height:90%;'></div><div class = 'img-container' style='width:50%;height:50%;'><img src='img/ilsoy.jpg' style='width:90%;height:90%;'></div>" + config.walkthroughWelcome,
        buttons:{'I already know':0,'How do I use this?':1},
        focus: 1,
        submit: tourSubmitFunc
@@ -222,7 +222,7 @@ if (deviceIsMobile) {
     },
       {
        title: "More Info",
-       html: config.walkthroughWelcome,
+       html: "<div class = 'img-container'><img src='img/IDOT.jpg'></div>" + config.walkthroughWelcome,
        buttons:{'Go back':-1,'I\'m ready!':0},
        focus: 1,
        submit: tourSubmitFunc
