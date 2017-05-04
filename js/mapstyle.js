@@ -82,6 +82,8 @@ var boundaries = new L.LayerGroup();
 
 var urban = new L.LayerGroup();
 
+var mpo = new L.LayerGroup();
+
 var gai = new L.LayerGroup();
 
 var counts = new L.LayerGroup();
@@ -139,6 +141,8 @@ layers: [0,1]
 
 var overlays = {
 "counties": countiesStyle,
+"planning agencies": rpaStyle,
+"MPOs": mpo,
 // "gai features": gai,
 // "counts": counts,
 "urban": urban,
@@ -151,6 +155,19 @@ var overlays = {
 // boundaries.addTo(map);
 
 // freight.addTo(map);
+
+var mpo = L.esri.featureLayer({
+    url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/MetropolitanPlanningOrganizations/MapServer/0',
+    // useCors: false,
+    pane: 'shadowPane',
+    // where: "STATE IN('IL')",
+    // layerDefs: {0: "STFIPS='17'"}
+}).addTo(mpo);
+
+var mpoPopup = "<p>{MPONAME}<br></p>"
+mpo.bindPopup(function (layer) {
+  return L.Util.template(mpoPopup, layer.feature.properties);
+});
 
 var urban = L.esri.dynamicMapLayer({
     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/UrbanizedAreas/MapServer',

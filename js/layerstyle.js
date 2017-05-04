@@ -28,6 +28,34 @@ function onEachFeatureFreight(feature, layer) {
     }
 }
 
+function onEachFeatureIntermodalConn(feature, layer) {
+    // if (feature.properties && feature.properties.name)
+    {
+        var popupContent = '<table>';
+            popupContent += '<tr><td>' + "" + ':</td><td><b>' + feature.properties['CONN_DES'] + '</b></td></tr>';
+        popupContent += '</table>';
+        layer.bindPopup(popupContent);
+
+                // layer.bindPopup(popupContent, {closeButton: false, offset: L.point(0, -20)});
+                // layer.on('mouseover', function() { layer.openPopup(); });
+                // layer.on('mouseout', function() { layer.closePopup(); });
+    }
+}
+
+function onEachFeatureRpa(feature, layer) {
+    // if (feature.properties && feature.properties.name)
+    {
+        var popupContent = '<table>';
+            popupContent += '<tr><td>' + "" + ':</td><td><b>' + feature.properties['rpa'] + '</b></td></tr>';
+        popupContent += '</table>';
+        layer.bindPopup(popupContent);
+
+                // layer.bindPopup(popupContent, {closeButton: false, offset: L.point(0, -20)});
+                // layer.on('mouseover', function() { layer.openPopup(); });
+                // layer.on('mouseout', function() { layer.closePopup(); });
+    }
+}
+
 
   var layerOrder = new Array();
   var feature_group = new L.featureGroup([]);
@@ -52,11 +80,28 @@ function onEachFeatureFreight(feature, layer) {
   }
 
   var intermodalStyle = L.geoJson(intermodal_conn, {
-      onEachFeature: onEachFeature
-  })
+      onEachFeature: onEachFeatureIntermodalConn
+  });
 
   layerOrder[layerOrder.length] = intermodalStyle;
   feature_group.addLayer(intermodalStyle);
+
+  var rpaStyle = L.geoJson(rpa_diss, {
+
+      onEachFeature: onEachFeatureRpa,
+      style: {
+          color: '#999999',
+          weight: '2',
+          opacity: '.5',
+
+      },
+      interactive :true,
+      pane: 'shadowPane',
+  });
+
+  layerOrder[layerOrder.length] = rpaStyle;
+  feature_group.addLayer(rpaStyle);
+
 var selected
 
   var freightStyle = new L.geoJson(nhfn, {
