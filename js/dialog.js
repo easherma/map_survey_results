@@ -12,9 +12,9 @@ dialogGlobal = $( "#dialogGlobal" ).dialog({
   buttons: [{
     text: "Submit",
       click: function() {
-        var checkedValues = dialogGlobalChecker(username.value, zipcode.value);
+        var checkedValues = dialogGlobalChecker(username.value, password.value);
         if (checkedValues.valid){
-            zip = "'"+zipcode.value+"'";
+            zip = "'"+password.value+"'";
             enteredUsername = "'"+username.value+"'";
 
             dialogGlobal.dialog("close");
@@ -51,9 +51,9 @@ dialogGlobal = $( "#dialogGlobal" ).dialog({
 });
 
 $("#globalAccept").on("touchstart", function() {
-        var checkedValues = dialogGlobalChecker(username.value, zipcode.value);
+        var checkedValues = dialogGlobalChecker(username.value, password.value);
         if (checkedValues.valid){
-            zip = "'"+zipcode.value+"'";
+            zip = "'"+password.value+"'";
             enteredUsername = "'"+username.value+"'";
 
             dialogGlobal.dialog("close");
@@ -135,10 +135,10 @@ function dialogGlobalChecker(name, zip) {
         valid = false;
     }
     if(zip.length < 5){
-        error.push("Your zipcode is too short.");
+        error.push("Your password is too short.");
         valid = false;
     }else if(!/(^\d{5}$)/.test(zip)){
-        error.push("Your zipcode is invalid.");
+        error.push("Your password is invalid.");
         valid = false;
     }
     return {valid: valid, error: error};
@@ -180,7 +180,7 @@ tourStates = [
     },
     {
         title:"Enable Drawing",
-        html:"Click on either <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-map-marker fa-inverse fa-stack-1x'></i></span> or <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-pencil fa-inverse fa-stack-1x'></i></span> to start giving your input. First we'll want you to enter your first name and zipcode.<br> After that you'll be able to add your input to the map!",
+        html:"Click on either <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-map-marker fa-inverse fa-stack-1x'></i></span> or <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-pencil fa-inverse fa-stack-1x'></i></span> to start giving your input. First we'll want you to enter your first name and password.<br> After that you'll be able to add your input to the map!",
         buttons:{'Go back':-1,'I\'m done':0,'Tell me more!':1},
         position: { container: '#leftBar', x: 150, y: 0, width: 300, arrow: 'lt' },
         focus:2,

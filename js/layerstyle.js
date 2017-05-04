@@ -18,10 +18,13 @@ function onEachFeatureFreight(feature, layer) {
     // if (feature.properties && feature.properties.name)
     {
         var popupContent = '<table>';
-
             popupContent += '<tr><td>' + "AADTT" + ':</td><td><b>' + feature.properties['AADTT'] + '</b></td></tr>';
         popupContent += '</table>';
-        layer.bindPopup(popupContent);
+        // layer.bindPopup(popupContent);
+
+                layer.bindPopup(popupContent, {closeButton: false, offset: L.point(0, -20)});
+                layer.on('mouseover', function() { layer.openPopup(); });
+                layer.on('mouseout', function() { layer.closePopup(); });
     }
 }
 
@@ -56,13 +59,14 @@ var selected
   var freightStyle = new L.geoJson(nhfn, {
       style: styleNhfn,
       onEachFeature: onEachFeatureFreight,
-      clickable :false,
+      interactive :false,
       pane: 'shadowPane'
-  }).on('click', function (e) {
+  }).on('mouseover', function (e) {
       // Check for selected
       if (selected) {
         // Reset selected to default style
         e.target.resetStyle(selected)
+
       }
       // Assign new selected
       selected = e.layer

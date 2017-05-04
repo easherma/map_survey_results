@@ -45,7 +45,7 @@
 
   </head>
   <body>
-    <div id="wrapper">
+
 
     <div id="map" title=""></div>
 
@@ -53,10 +53,14 @@
       <form>
         <fieldset style="border: none;">
           <ul style="list-style-type: none; padding-left: 0px">
-            <li><label for="username">RPO</label></li>
+            <li><label for="orgname">Organization</label></li>
+            <li><input type="text" name="username" id="orgname" placeholder="Enter your associated organization" pattern="[A-Za-z]{3,}" title="Your first name must be at least 3 letters" class="text ui-widget-content ui-corner-all"></li>
+            <li><label for="username">Name</label></li>
             <li><input type="text" name="username" id="username" placeholder="Enter your name" pattern="[A-Za-z]{3,}" title="Your first name must be at least 3 letters" class="text ui-widget-content ui-corner-all" required></li>
-            <li><label for="zipcode">Password</label></li>
-            <li><input type="text" name="zipcode" maxlength="5" pattern="[0-9]{5}" id="zipcode" title="Please enter a 5 digit zip-code" placeholder="02134" class="text ui-widget-content ui-corner-all" required></li>
+            <li><label for="email">Email</label></li>
+            <li><input type="email" name="username" id="email" placeholder="Enter your email"  title="Your email must be valid" class="text ui-widget-content ui-corner-all" required></li>
+            <li><label for="password">Password</label></li>
+            <li><input type="text" name="password" maxlength="5" pattern="[0-9]{5}" id="password" title="Please enter a password" placeholder="02134" class="text ui-widget-content ui-corner-all" required></li>
           </ul>
         </fieldset>
       </form>
