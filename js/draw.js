@@ -1,7 +1,7 @@
             //Empty to store drawn routes after they are submitted
         var submittedRoutes = new L.geoJson(false, {
             onEachFeature: function (feature, layer) {
-              layer.bindPopup('<b>'+feature.properties.name +', '+ feature.properties.zipcode +'</b><br>'                               +feature.properties.description +'');
+              layer.bindPopup('<b>'+feature.properties.name +', '+ feature.properties.password +'</b><br>'                               +feature.properties.description +'');
             }
             ,style: function(feature){
                 /* Styles the submitted route drawing with the same properties as the drawn route as defined by line(id)  in definitions.js */
@@ -128,6 +128,8 @@
 
     function setData() {
       var enteredDescription = "'"+description.value+"'";
+      var enteredEmail = "'"+email.value+"'";
+      var enteredOrgname = "'"+orgname.value+"'";
     //Convert the drawing to a GeoJSON to pass to the CartoDB sql database
 
       var drawing = "";
@@ -140,7 +142,9 @@
 
             submittedLine.properties.description = description.value;
             submittedLine.properties.name = username.value;
-            submittedLine.properties.zipcode = zip;
+            // submittedLine.properties.password = password.value;
+            submittedLine.properties.email = email.value;
+            submittedLine.properties.orgname = orgname.value;
             submittedLine.properties.color = currentLine.polyline.options.color;
             submittedLine.properties.weight = currentLine.polyline.options.weight;
             submittedLine.properties.opacity= currentLine.polyline.options.opacity;
@@ -161,7 +165,9 @@
                 // Transfer drawing to the CartoDB layer
                   newData.properties.description = description.value;
                   newData.properties.name = username.value;
-                  newData.properties.zipcode = zip;
+                //   newData.properties.password = password;
+                  newData.properties.email = email.value;
+                  newData.properties.orgname = orgname.value;
                 submittedData.addData(newData);
             });
 			stopDrawingPoints();
@@ -176,7 +182,9 @@
       sql += drawing;
       sql += ","+enteredDescription;
       sql += ","+enteredUsername;
-      sql += ","+zip+");";
+    //   sql += ","+password;
+      sql += ","+enteredEmail;
+      sql += ","+enteredOrgname+");";
 
 //        console.log(sql); //For testing
 
@@ -190,10 +198,11 @@
         success: function(responseData, textStatus, jqXHR) {
           console.log("Data saved");
 
+
         },
         error: function (responseData, textStatus, errorThrown) {
             console.log(responseData);
-
+            console.log(sql);
             console.log("Problem saving the data");
         }
       });

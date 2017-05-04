@@ -74,7 +74,7 @@ layerControl = L.control.layers({},{},{collapsed:false});
 //Empty to store markers after they are submitted
 var submittedData = L.geoJson(false, {
 onEachFeature: function (feature, layer) {
-  layer.bindPopup('<b>'+feature.properties.name +', '+ feature.properties.zipcode +'</b><br>'                               +feature.properties.description +'');
+  layer.bindPopup('<b>'+feature.properties.name +', '+ feature.properties.password +'</b><br>'                               +feature.properties.description +'');
 }
 }).addTo(map);
 

@@ -15,5 +15,7 @@ var config = {
     //Change to your username, insert function on cartodb, and cartodb tablename (see also /cartoDB_functions)
 	cartoDBusername : 'easherma',
 	cartoDBinsertfunction : 'insert_bikeways_data',
-	walkthroughWelcome: "<p>This webmap allows you to submit input on where critical rural freight coordiors can be improved by drawing on the map. It also allows you to view relevant data we have collected.</p>"
+	walkthroughWelcome: "<p>This webmap allows you to submit input on where critical rural freight coordiors can be improved by drawing on the map. It also allows you to view relevant data we have collected.</p>",
+    routesDialog: "<br>Routes can indicate a critical coordior or problem stretch of road... Click to add points to form a route. Double click on the final point to end that route, and then write a description. You are welcome to input as many routes as you please",
+    pointsDialog: "<br>Tell us about critical facilities, problem areas, or other location-based issues. When you click 'Save Input' your marker and description are sent to our database."
 };

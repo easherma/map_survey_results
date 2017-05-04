@@ -12,9 +12,9 @@ dialogGlobal = $( "#dialogGlobal" ).dialog({
   buttons: [{
     text: "Submit",
       click: function() {
-        var checkedValues = dialogGlobalChecker(username.value, password.value);
+        var checkedValues = dialogGlobalChecker(username.value);
         if (checkedValues.valid){
-            zip = "'"+password.value+"'";
+            // password = "'"+password.value+"'";
             enteredUsername = "'"+username.value+"'";
 
             dialogGlobal.dialog("close");
@@ -51,9 +51,9 @@ dialogGlobal = $( "#dialogGlobal" ).dialog({
 });
 
 $("#globalAccept").on("touchstart", function() {
-        var checkedValues = dialogGlobalChecker(username.value, password.value);
+        var checkedValues = dialogGlobalChecker(username.value);
         if (checkedValues.valid){
-            zip = "'"+password.value+"'";
+            // password = "'"+password.value+"'";
             enteredUsername = "'"+username.value+"'";
 
             dialogGlobal.dialog("close");
@@ -127,20 +127,20 @@ dialog = $( "#dialog" ).dialog({
   }
 });
 
-function dialogGlobalChecker(name, zip) {
+function dialogGlobalChecker(name) {
     var error = [];
     var valid = true;
     if(name.length < 3) {
         error.push("Your name is too short.");
         valid = false;
     }
-    if(zip.length < 5){
-        error.push("Your password is too short.");
-        valid = false;
-    }else if(!/(^\d{5}$)/.test(zip)){
-        error.push("Your password is invalid.");
-        valid = false;
-    }
+    // if(password.length < 5){
+    //     error.push("Your password is too short.");
+    //     valid = false;
+    // }else if(!/(^\d{5}$)/.test(password)){
+    //     error.push("Your password is invalid.");
+    //     valid = false;
+    // }
     return {valid: valid, error: error};
 }
 
@@ -180,7 +180,7 @@ tourStates = [
     },
     {
         title:"Enable Drawing",
-        html:"Click on either <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-map-marker fa-inverse fa-stack-1x'></i></span> or <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-pencil fa-inverse fa-stack-1x'></i></span> to start giving your input. First we'll want you to enter your first name and password.<br> After that you'll be able to add your input to the map!",
+        html:"Click on either <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-map-marker fa-inverse fa-stack-1x'></i></span> or <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-pencil fa-inverse fa-stack-1x'></i></span> to start giving your input. First we'll want you to enter some identifying information.<br> After that you'll be able to add your input to the map!",
         buttons:{'Go back':-1,'I\'m done':0,'Tell me more!':1},
         position: { container: '#leftBar', x: 150, y: 0, width: 300, arrow: 'lt' },
         focus:2,
@@ -188,7 +188,7 @@ tourStates = [
     },
     {
         title:"Click on <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-map-marker fa-inverse fa-stack-1x'></i></span> and Place a Marker on the Map",
-        html:"<div class = 'img-container'><img src='img/add_marker.gif'></div><br>Tell us about dangerous intersections, potholes, etc. When you click 'Save Input' your marker and description are sent to our database.",
+        html:"<div class = 'img-container'><img src='img/add_marker.gif'></div>" +  config.pointsDialog,
         buttons:{'Go back':-1,'I\'m done':0,'Tell me more!':1},
         position:{width:500},
         focus:2,
@@ -196,7 +196,7 @@ tourStates = [
     },
     {
         title:"Or Click on <span class='fa-stack fa-lg'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-pencil fa-inverse fa-stack-1x'></i></span> to Draw a Route",
-        html:"<div class = 'img-container'><img src='img/draw_route.gif'></div><br>Routes can indicate your entire commute, or small locations where bike lanes are missing, or frequently blocked... Click to add points to form a route. Double click on the final point to end that route, and then write a description. You are welcome to input as many routes as you please",
+        html:"<div class = 'img-container'><img src='img/draw_route.gif'></div>"+ config.routesDialog,
         buttons:{'Go back':-1,'I\'m ready!':0},
         position:{width:500},
         focus:1,
