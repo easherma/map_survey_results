@@ -33,7 +33,14 @@ function restackLayers() {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
             maxZoom: 19
         });
+
+        var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+
         CartoDB_PositronNoLabels.addTo(map);
+
+        // Esri_WorldImagery.addTo(map);
 
         //Bug appeared preventing ending of route drawing.
 		map.doubleClickZoom.disable();
@@ -77,6 +84,8 @@ onEachFeature: function (feature, layer) {
   layer.bindPopup('<b>'+feature.properties.name +', '+ feature.properties.password +'</b><br>'                               +feature.properties.description +'');
 }
 }).addTo(map);
+
+var arcgisOnline = L.esri.Geocoding.arcgisOnlineProvider();
 
 var boundaries = new L.LayerGroup();
 
@@ -139,7 +148,14 @@ precision: 5,
 layers: [0,1]
 }).addTo(counts);
 
+var basemaps = {
+    "grayscale" : CartoDB_PositronNoLabels,
+    "physical" : Esri_WorldImagery,
+    // "labels" : labelLayer
+}
+
 var overlays = {
+// "labels": labelLayer,
 "counties": countiesStyle,
 "planning agencies": rpaStyle,
 "MPOs": mpo,
@@ -194,7 +210,7 @@ var urban = L.esri.dynamicMapLayer({
 
 
 
-var layerControl = new L.control.layers({}, overlays, {collapsed:false}).addTo(map);
+var layerControl = new L.control.layers(basemaps, overlays, {collapsed:false}).addTo(map);
 layerControl.addTo(map);
 
 
@@ -215,3 +231,26 @@ layerControl.addTo(map);
 				locateOptions: {maxZoom: 17}
 			}).addTo(map);
 		}
+
+var searchControl = L.esri.Geocoding.geosearch({
+  providers: [
+    arcgisOnline,
+    // L.esri.Geocoding.mapServiceProvider({
+    //   label: 'States and Counties',
+    //   url: 'https://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer',
+    //   layers: [2, 3],
+    //   searchFields: ['NAME', 'STATE_NAME']
+    // })
+  ]
+}).addTo(map);
+
+// .bindPopup(data.results[i].properties.Match_addr).openPopup()
+var results = L.layerGroup().addTo(map);
+
+searchControl.on('results', function(data){
+  results.clearLayers();
+  console.log(data.results[0]);
+  for (var i = data.results.length - 1; i >= 0; i--) {
+    results.addLayer(L.marker(data.results[i].latlng).bindPopup(data.results[i].properties.Match_addr).openPopup());
+  }
+});
