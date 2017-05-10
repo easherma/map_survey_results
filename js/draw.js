@@ -126,6 +126,7 @@
 		markerDraw = false;
 	}
 
+//set data and submit it
     function setData() {
       var enteredDescription = "'"+description.value+"'";
       var enteredEmail = "'"+email.value+"'";
@@ -178,6 +179,15 @@
         //Ensures that drawn routes stay on the map.
         if(routeDraw){submittedRoutes.eachLayer( function(layer){layer.addTo(map);});};
       //Construct the SQL query to insert data from the three parameters: the drawing, the input username, and the input description of the drawn shape
+
+      var data = {
+        'geom': drawing,
+        'description': enteredDescription,
+        'username': enteredUsername,
+        'email': enteredEmail,
+        'org': enteredOrgname
+
+    };
       var sql = "SELECT "+ config.cartoDBinsertfunction +"(";
       sql += drawing;
       sql += ","+enteredDescription;
@@ -187,6 +197,24 @@
       sql += ","+enteredOrgname+");";
 
 //        console.log(sql); //For testing
+
+$.ajax({
+  type: 'POST',
+  url: 'http://localhost:8000/map/submission/add',
+  crossDomain: true,
+  data: {data},
+  dataType: 'json',
+  success: function(responseData, textStatus, jqXHR) {
+    console.log("Data saved");
+
+
+  },
+  error: function (responseData, textStatus, errorThrown) {
+      console.log(responseData);
+      console.log("Problem saving the data to django");
+  }
+});
+
 
     //Sending the data
       $.ajax({
