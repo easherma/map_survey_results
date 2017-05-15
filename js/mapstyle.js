@@ -160,11 +160,11 @@ var overlays = {
 "planning agencies": rpaStyle,
 "MPOs": mpo,
 // "gai features": gai,
-// "counts": counts,
-"urban": urban,
+"military": militaryStyle,
+"urban": urbanStyle,
 "nhfn": freightStyle,
 "intermmodal connectors": intermodalStyle,
-"intermodal facilities": intermodal_legend,
+"intermodal facilities": intermodalpointsStyle,
 "submissions": submissions
 };
 
@@ -172,24 +172,43 @@ var overlays = {
 
 // freight.addTo(map);
 
-var mpo = L.esri.featureLayer({
+var mpoQuery = L.esri.query({
     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/MetropolitanPlanningOrganizations/MapServer/0',
     // useCors: false,
     pane: 'shadowPane',
     // where: "STATE IN('IL')",
     // layerDefs: {0: "STFIPS='17'"}
-}).addTo(mpo);
+});
+
+mpoQuery.within(bounds);
+
+mpoQuery.run(function(error, featureCollection, response){
+    L.geoJSON(featureCollection).addTo(mpo);
+});
+
+
+// .addTo(mpo);
+//
+// var mpoSelect = {};
+// mpo.query()
+// .within(bounds)
+// .run(function(error, featureCollection){
+// return mpoSelect = featureCollection;
+// console.log(featureCollection);
+// });
+//
+// L.geoJSON(mpoSelect).addTo(mpo);
 
 var mpoPopup = "<p>{MPONAME}<br></p>"
 mpo.bindPopup(function (layer) {
   return L.Util.template(mpoPopup, layer.feature.properties);
 });
 
-var urban = L.esri.dynamicMapLayer({
-    url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/UrbanizedAreas/MapServer',
-    useCors: false,
-    layerDefs: {0: "STFIPS1='17'"}
-}).addTo(urban);
+// var urban = L.esri.dynamicMapLayer({
+//     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/UrbanizedAreas/MapServer',
+//     useCors: false,
+//     layerDefs: {0: "STFIPS1='17'"}
+// }).addTo(urban);
 
 // var urban = L.esri.dynamicMapLayer({
 //     url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_functionalclass/MapServer/1',

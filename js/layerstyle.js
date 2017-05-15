@@ -14,6 +14,15 @@ function onEachFeature(feature, layer) {
     }
 }
 
+var geojsonMarkerOptions = {
+    radius: 5,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
 function onEachFeatureFreight(feature, layer) {
     // if (feature.properties && feature.properties.name)
     {
@@ -25,6 +34,18 @@ function onEachFeatureFreight(feature, layer) {
                 layer.bindPopup(popupContent, {closeButton: false, offset: L.point(0, -20)});
                 layer.on('mouseover', function() { layer.openPopup(); });
                 layer.on('mouseout', function() { layer.closePopup(); });
+    }
+}
+
+function onEachFeatureIntermodalPoints(feature, layer) {
+    // if (feature.properties && feature.properties.name)
+    {
+        var popupContent = '<table>';
+            popupContent += '<tr><td>' + 'Name' + ':</td><td><b>' + feature.properties['NAME1_'] + '</b></td></tr>';
+            popupContent += '<tr><td>' + 'Status' + ':</td><td><b>' + feature.properties['MapStatus'] + '</b></td></tr>';
+            popupContent += '<tr><td>' + 'Notes' + ':</td><td><b>' + feature.properties['Notes'] + '</b></td></tr>';
+        popupContent += '</table>';
+        layer.bindPopup(popupContent);
     }
 }
 
@@ -86,6 +107,35 @@ function onEachFeatureRpa(feature, layer) {
   layerOrder[layerOrder.length] = intermodalStyle;
   feature_group.addLayer(intermodalStyle);
 
+  var militaryStyle = L.geoJson(military, {
+      onEachFeature: onEachFeature
+  });
+
+  layerOrder[layerOrder.length] = militaryStyle;
+  feature_group.addLayer(militaryStyle);
+
+  var intermodalpointsStyle = L.geoJson(intermodalpoints, {
+      onEachFeature: onEachFeatureIntermodalPoints,
+      pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, geojsonMarkerOptions);
+}
+  });
+
+  layerOrder[layerOrder.length] = intermodalpointsStyle;
+  feature_group.addLayer(intermodalpointsStyle);
+
+  var urbanStyle = L.geoJson(urban, {
+      style: {
+          color: '#999999',
+          weight: '2',
+          opacity: '.5',
+
+      }
+  });
+
+  layerOrder[layerOrder.length] = urbanStyle;
+  feature_group.addLayer(urbanStyle);
+
   var rpaStyle = L.geoJson(rpa_diss, {
 
       onEachFeature: onEachFeatureRpa,
@@ -144,6 +194,8 @@ var countiesStyle = new L.geoJson(counties, {
 });
 layerOrder[layerOrder.length] = countiesStyle;
 feature_group.addLayer(countiesStyle);
+
+
   //
   //
   // function doStylebikefacilities(feature) {
