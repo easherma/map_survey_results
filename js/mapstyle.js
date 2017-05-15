@@ -1,6 +1,8 @@
 var layerOrder = new Array();
 var feature_group = new L.featureGroup([]);
 
+
+
 function stackLayers() {
     for (index = 0; index < layerOrder.length; index++) {
         map.removeLayer(layerOrder[index]);
