@@ -16,6 +16,7 @@ $.ajax({
   crossDomain: true,
   // data: {"q":sql_statement},
   dataType: 'json',
+  contentType: 'application/json; charset=utf-8',
   success: function(responseData, textStatus, jqXHR) {
     console.log("Submissions retrived");
     console.log(JSON.stringify(responseData));
@@ -27,7 +28,7 @@ $.ajax({
 
   },
   error: function (responseData, textStatus, errorThrown) {
-      console.log(responseData);
+      console.log(JSON.stringify(responseData));
       console.log("Problem retriving submissions");
   }
 });

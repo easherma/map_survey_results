@@ -210,7 +210,7 @@
 $.ajax({
   type: 'POST',
   url: 'http://localhost:8000/api/submissions/',
-  crossDomain: true,
+  // crossDomain: true,
   data:
   // submission
   {
@@ -240,7 +240,7 @@ $.ajax({
       $.ajax({
         type: 'POST',
         url: 'https://'+config.cartoDBusername+'.carto.com/api/v2/sql',
-        crossDomain: true,
+        // crossDomain: true,
         data: {"q":sql},
         dataType: 'json',
         success: function(responseData, textStatus, jqXHR) {

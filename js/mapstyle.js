@@ -117,7 +117,7 @@ var minorports = new L.LayerGroup();
 // L.esri.featureLayer({
 // url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_boundaries/MapServer/5',
 // opacity: 0.7,
-// useCors: false,
+// useCors: true,
 // simplifyFactor: 1,
 // precision: 5,
 // layers: [5]
@@ -126,7 +126,7 @@ var minorports = new L.LayerGroup();
 // L.esri.featureLayer({
 // url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_designatedtruckroutes/MapServer/2',
 // opacity: 0.7,
-// useCors: false,
+// useCors: true,
 // simplifyFactor: 1,
 // precision: 5,
 // layers: [0,1,2,3,4]
@@ -146,7 +146,7 @@ intermodal.bindPopup(function (layer) {
 L.esri.dynamicMapLayer({
 url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_trafficCount/MapServer/',
 opacity: 0.7,
-useCors: false,
+useCors: true,
 simplifyFactor: 1,
 
 precision: 5,
@@ -182,7 +182,7 @@ var overlays = {
 //query mpo service, just in bounds
 var mpoQuery = L.esri.query({
     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/MetropolitanPlanningOrganizations/MapServer/0',
-    // useCors: false,
+    useCors: false,
     pane: 'shadowPane',
     // where: "STATE IN('IL')",
     // layerDefs: {0: "STFIPS='17'"}
@@ -196,7 +196,7 @@ mpoQuery.run(function(error, featureCollection, response){
 
 var majorPortQuery = L.esri.query({
     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/Ports_Major/MapServer/0',
-    // useCors: false,
+    useCors: false,
     // onEachFeature: onEachFeature,
     pane: 'shadowPane',
     // where: "STATE IN('IL')",
@@ -216,7 +216,7 @@ majorPortQuery.run(function(error, featureCollection, response){
 
 var minorPortQuery = L.esri.query({
     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/Ports/MapServer/0',
-    // useCors: false,
+    useCors: false,
     // onEachFeature: onEachFeature,
     pane: 'shadowPane',
     // where: "STATE IN('IL')",
@@ -259,13 +259,13 @@ mpo.bindPopup(function (layer) {
 
 // var urban = L.esri.dynamicMapLayer({
 //     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/UrbanizedAreas/MapServer',
-//     useCors: false,
+//     useCors: true,
 //     layerDefs: {0: "STFIPS1='17'"}
 // }).addTo(urban);
 
 // var urban = L.esri.dynamicMapLayer({
 //     url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_functionalclass/MapServer/1',
-//     useCors: false
+//     useCors: true
 // }).addTo(gai);
 
 // L.esri.legendControl(ports).addTo(map);
@@ -273,7 +273,7 @@ mpo.bindPopup(function (layer) {
 // var urban = L.esri.featureLayer({
 // url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/UrbanizedAreas/MapServer',
 // opacity: 0.7,
-// useCors: false,
+// useCors: true,
 // simplifyFactor: 1,
 // precision: 5,
 // layers: [0]
