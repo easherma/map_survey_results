@@ -132,12 +132,13 @@
       var enteredEmail = "'"+email.value+"'";
       var enteredOrgname = "'"+orgname.value+"'";
     //Convert the drawing to a GeoJSON to pass to the CartoDB sql database
-
+    var submission;
       var drawing = "";
         if(routeDraw){
             var submittedLine = currentLine.polyline.toGeoJSON();
+            submittedGeom = submittedLine.geometry;
 
-            drawing = "'"+JSON.stringify(submittedLine.geometry)+"'";
+            drawing = JSON.stringify(submittedLine.geometry);
 
             //To ensure that drawn routes remain on map after saving, with popup.
 
@@ -151,7 +152,7 @@
             submittedLine.properties.opacity= currentLine.polyline.options.opacity;
 
             submittedRoutes.addData(submittedLine);
-
+            submission = submittedRoutes;
             routeNum ++;
 			stopRouteDraw();
 			$("#cancel").hide();
@@ -161,6 +162,7 @@
             drawnMarkers.eachLayer(function (layer) {
                 //Convert the drawing to a GeoJSON to pass to the CartoDB sql database
                 var newData = layer.toGeoJSON();
+                submittedGeom = newData.geometry;
                 drawing = "'"+JSON.stringify(newData.geometry)+"'";
 
                 // Transfer drawing to the CartoDB layer
@@ -170,6 +172,7 @@
                   newData.properties.email = email.value;
                   newData.properties.orgname = orgname.value;
                 submittedData.addData(newData);
+                submission = newData;
             });
 			stopDrawingPoints();
 
@@ -180,14 +183,20 @@
         if(routeDraw){submittedRoutes.eachLayer( function(layer){layer.addTo(map);});};
       //Construct the SQL query to insert data from the three parameters: the drawing, the input username, and the input description of the drawn shape
 
-      var data = {
-        'geom': drawing,
-        'description': enteredDescription,
-        'username': enteredUsername,
-        'email': enteredEmail,
-        'org': enteredOrgname
+    //   var data = {
+    //     'geom': submittedGeom.geometry,
+    //     'description': description.value,
+    //     'username': username.value,
+    //     'email': email.value,
+    //     'org': orgname.value
+    //
+    // };
+    var json = drawing;
+    json += enteredDescription;
+    json += enteredUsername;
+    json += enteredEmail;
+    json += enteredOrgname;
 
-    };
       var sql = "SELECT "+ config.cartoDBinsertfunction +"(";
       sql += drawing;
       sql += ","+enteredDescription;
@@ -200,16 +209,27 @@
 
 $.ajax({
   type: 'POST',
-  url: 'http://localhost:8000/map/submission/add',
+  url: 'http://localhost:8000/api/submissions/',
   crossDomain: true,
-  data: {data},
-  dataType: 'json',
+  data:
+  // submission
+  {
+        'geom': drawing,
+        'description': description.value,
+        'name': username.value,
+        'email': email.value,
+        'org': orgname.value
+    }
+    ,
+  dataType: "json",
   success: function(responseData, textStatus, jqXHR) {
     console.log("Data saved");
+    console.log(responseData);
 
 
   },
   error: function (responseData, textStatus, errorThrown) {
+    //   console.log(data);
       console.log(responseData);
       console.log("Problem saving the data to django");
   }
