@@ -103,6 +103,9 @@ var intermodal_legend = new L.LayerGroup();
 
 var submissions = new L.LayerGroup();
 
+var majorports = new L.LayerGroup();
+var minorports = new L.LayerGroup();
+
 // L.geoJSON(counties).addTo(boundaries);
 
 // L.geoJSON(nhfn).addTo(freight);
@@ -149,29 +152,32 @@ layers: [0,1]
 }).addTo(counts);
 
 var basemaps = {
-    "grayscale" : CartoDB_PositronNoLabels,
-    "physical" : Esri_WorldImagery,
+    "Grayscale Basemap" : CartoDB_PositronNoLabels,
+    "Physical Basemap (Satellite)" : Esri_WorldImagery,
     // "labels" : labelLayer
 }
 
 var overlays = {
 // "labels": labelLayer,
-"counties": countiesStyle,
-"planning agencies": rpaStyle,
+"Counties": countiesStyle,
+"Planning Agencies": rpaStyle,
 "MPOs": mpo,
 // "gai features": gai,
-"military": militaryStyle,
-"urban": urbanStyle,
-"nhfn": freightStyle,
-"intermmodal connectors": intermodalStyle,
-"intermodal facilities": intermodalpointsStyle,
-"submissions": submissions
+"Military Bases": militaryStyle,
+"Urban Areas": urbanStyle,
+"National Highway Freight Network": freightStyle.addTo(map),
+"Intermodal Connectors": intermodalStyle,
+"Intermodal Facilities": intermodalpointsStyle,
+"Submissions": submissions,
+"Major Ports": majorports,
+"Minor Ports": minorports
 };
 
 // boundaries.addTo(map);
 
-// freight.addTo(map);
 
+
+//query mpo service, just in bounds
 var mpoQuery = L.esri.query({
     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/MetropolitanPlanningOrganizations/MapServer/0',
     // useCors: false,
@@ -183,7 +189,47 @@ var mpoQuery = L.esri.query({
 mpoQuery.within(bounds);
 
 mpoQuery.run(function(error, featureCollection, response){
-    L.geoJSON(featureCollection).addTo(mpo);
+    L.geoJSON(featureCollection , { onEachFeature: onEachFeatureMPO}).addTo(mpo);
+});
+
+var majorPortQuery = L.esri.query({
+    url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/Ports_Major/MapServer/0',
+    // useCors: false,
+    // onEachFeature: onEachFeature,
+    pane: 'shadowPane',
+    // where: "STATE IN('IL')",
+    // layerDefs: {0: "STFIPS='17'"}
+});
+
+majorPortQuery.within(bounds);
+
+majorPortQuery.run(function(error, featureCollection, response){
+    L.geoJSON(featureCollection, {
+        onEachFeature: onEachFeature,
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, majorPortMarkerOptions);
+            }
+    }).addTo(majorports);
+});
+
+var minorPortQuery = L.esri.query({
+    url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/Ports/MapServer/0',
+    // useCors: false,
+    // onEachFeature: onEachFeature,
+    pane: 'shadowPane',
+    // where: "STATE IN('IL')",
+    // layerDefs: {0: "STFIPS='17'"}
+});
+
+minorPortQuery.within(bounds);
+
+minorPortQuery.run(function(error, featureCollection, response){
+    L.geoJSON(featureCollection, {
+        onEachFeature: onEachFeature,
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, minorPortMarkerOptions);
+            }
+    }).addTo(minorports);
 });
 
 
@@ -203,6 +249,11 @@ var mpoPopup = "<p>{MPONAME}<br></p>"
 mpo.bindPopup(function (layer) {
   return L.Util.template(mpoPopup, layer.feature.properties);
 });
+
+// var portPopup = "<p>{PORT_NAME}<br></p>"
+// ports.bindPopup(function (layer) {
+//   return L.Util.template(portPopup, layer.feature.properties);
+// });
 
 // var urban = L.esri.dynamicMapLayer({
 //     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/UrbanizedAreas/MapServer',

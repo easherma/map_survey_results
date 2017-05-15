@@ -1,23 +1,63 @@
 /*  QGIS layer*/
 
-//generic code to append all attributes of a feature to a pop-up
+// generic code to append all attributes of a feature to a pop-up
 
 function onEachFeature(feature, layer) {
-    // if (feature.properties && feature.properties.name)
+    if (feature.properties )
     {
-        var popupContent = '<table>';
+        var popupContent = '<table >';
         for (var p in feature.properties) {
             popupContent += '<tr><td>' + p + ':</td><td><b>' + feature.properties[p] + '</b></td></tr>';
         }
+        popupContent += '</table>';
+        layer.bindPopup(popupContent, {maxWidth: 300, minWidth: 250, maxHeight: 160, autoPan: true, closeButton: true, autoPanPadding: [5, 5]});
+    }
+}
+
+function onEachFeatureMPO(feature, layer) {
+    if (feature.properties)
+    {
+        var popupContent = '<table>';
+        popupContent += '<tr><td>' + "" + '</td><td><b>' + feature.properties['MPONAME'] + '</b></td></tr>';
         popupContent += '</table>';
         layer.bindPopup(popupContent);
     }
 }
 
+function onEachFeaturePorts(feature, layer) {
+    if (feature.properties)
+    {
+        var popupContent = '<table>';
+        popupContent += '<tr><td>' + "" + '</td><td><b>' + feature.properties['PORT_NAME'] + '</b></td></tr>';
+        popupContent += '</table>';
+        layer.bindPopup(popupContent);
+    }
+}
+
+
+
 var geojsonMarkerOptions = {
     radius: 5,
     fillColor: "#ff7800",
     color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
+var minorPortMarkerOptions = {
+    radius: 4,
+    // fillColor: "#ff7800",
+    // color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
+var majorPortMarkerOptions = {
+    radius: 12,
+    // fillColor: "#ff0000",
+    // color: "#000",
     weight: 1,
     opacity: 1,
     fillOpacity: 0.8
@@ -100,6 +140,24 @@ function onEachFeatureRpa(feature, layer) {
       }
   }
 
+  function styleMilitary(feature) {
+      if (feature.properties.OPER_STAT == "Active") {
+          return {
+                              color: '#205b22',
+                              weight: '2',
+                              opacity: '1.0',
+
+          }
+      }
+      else {
+          return {
+              color: '#3d3d3d',
+              weight: '2',
+              opacity: '1.0',
+          }
+      }
+  }
+
   var intermodalStyle = L.geoJson(intermodal_conn, {
       onEachFeature: onEachFeatureIntermodalConn
   });
@@ -107,8 +165,30 @@ function onEachFeatureRpa(feature, layer) {
   layerOrder[layerOrder.length] = intermodalStyle;
   feature_group.addLayer(intermodalStyle);
 
+  // function styleMilitary(feature) {
+  //    console.log(sn);
+  //    if (feature.properties.OPER_STAT == 'Active') {
+  //      return {
+  //          geojsonMarkerOptions
+  //      };
+  //    } else {
+  //      return {
+  //        weight: 2,
+  //        opacity: 1,
+  //        color: 'white',
+  //        dashArray: '3',
+  //        fillOpacity: 0.3,
+  //        fillColor: '#666666'
+  //      };
+  //    }
+  //  }
   var militaryStyle = L.geoJson(military, {
-      onEachFeature: onEachFeature
+      style: styleMilitary,
+      onEachFeature: onEachFeature,
+      pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng);
+}
+
   });
 
   layerOrder[layerOrder.length] = militaryStyle;
@@ -177,6 +257,8 @@ var selected
     });
 layerOrder[layerOrder.length] = freightStyle;
 feature_group.addLayer(freightStyle);
+
+
 
 function styleCounties(feature){
     return {
