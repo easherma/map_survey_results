@@ -12,7 +12,7 @@
 
 $.ajax({
   type: 'GET',
-  url: 'https://localhost:8000/api/data/',
+  url: 'http://ec2-13-58-130-156.us-east-2.compute.amazonaws.com/api/data/',
   // crossDomain: true,
   // data: {"q":sql_statement},
   dataType: 'json',
