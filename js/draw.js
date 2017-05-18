@@ -138,7 +138,7 @@
             var submittedLine = currentLine.polyline.toGeoJSON();
             submittedGeom = submittedLine.geometry;
 
-            drawing = JSON.stringify(submittedLine.geometry);
+            drawing = "'"+JSON.stringify(submittedLine.geometry)+"'";
 
             //To ensure that drawn routes remain on map after saving, with popup.
 
