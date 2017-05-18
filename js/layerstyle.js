@@ -1,3 +1,28 @@
+L.TopoJSON = L.GeoJSON.extend({
+    addData: function (data) {
+        var geojson, key;
+        if (data.type === "Topology") {
+            for (key in data.objects) {
+                if (data.objects.hasOwnProperty(key)) {
+                    geojson = topojson.feature(data, data.objects[key]);
+                    L.GeoJSON.prototype.addData.call(this, geojson);
+                }
+            }
+
+            return this;
+        }
+
+        L.GeoJSON.prototype.addData.call(this, data);
+
+        return this;
+    }
+});
+
+L.topoJson = function (data, options) {
+    return new L.TopoJSON(data, options);
+};
+// Copyright (c) 2013 Ryan Clark
+
 /*  QGIS layer*/
 
 // generic code to append all attributes of a feature to a pop-up
@@ -234,7 +259,7 @@ function onEachFeatureRpa(feature, layer) {
 
 var selected
 
-  var freightStyle = new L.geoJson(nhfn, {
+  var freightStyle = new L.TopoJSON(nhfn, {
       style: styleNhfn,
       onEachFeature: onEachFeatureFreight,
       interactive :false,
