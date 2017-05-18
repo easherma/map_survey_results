@@ -12,7 +12,7 @@
 
 $.ajax({
   type: 'GET',
-  url: 'http://localhost:8000/api/data/',
+  url: 'https://localhost:8000/api/data/',
   // crossDomain: true,
   // data: {"q":sql_statement},
   dataType: 'json',
