@@ -12,8 +12,8 @@
 
 $.ajax({
   type: 'GET',
-  url: 'http://ec2-13-58-130-156.us-east-2.compute.amazonaws.com/api/data/',
-  // crossDomain: true,
+  url: 'http://ec2-54-208-151-174.compute-1.amazonaws.com/api/data',
+  crossDomain: true,
   // data: {"q":sql_statement},
   dataType: 'json',
   contentType: 'application/json; charset=utf-8',
