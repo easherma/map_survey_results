@@ -209,7 +209,7 @@
 
 $.ajax({
   type: 'POST',
-  url: 'http://ec2-13-58-130-156.us-east-2.compute.amazonaws.com/api/submissions/',
+  url: 'https://ec2.osgisomg.com/api/submissions/',
   // crossDomain: true,
   data:
   // submission
