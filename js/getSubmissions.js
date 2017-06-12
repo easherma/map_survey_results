@@ -12,7 +12,7 @@
 
 $.ajax({
   type: 'GET',
-  url: 'https://ec2.osgisomg.com/api/data/',
+  url: 'https://api.osgisomg.com/api/data/',
   crossDomain: true,
   // data: {"q":sql_statement},
   dataType: 'json',
