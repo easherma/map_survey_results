@@ -209,7 +209,7 @@
 
 $.ajax({
   type: 'POST',
-  url: 'https://ec2.osgisomg.com/api/submissions/',
+  url: 'https://api.osgisomg.com/api/submissions/',
   // crossDomain: true,
   data:
   // submission
