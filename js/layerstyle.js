@@ -183,12 +183,158 @@ function onEachFeatureRpa(feature, layer) {
       }
   }
 
+  function styletruckcongestedhours(feature) {
+  if (feature.properties['light_hrs'] >= 0.0 &&
+          feature.properties['light_hrs'] <= 3.94075) {
+
+      return {
+          color: '#fef0d9',
+          weight: '2',
+          dashArray: '',
+          lineCap: 'square',
+          lineJoin: 'bevel',
+          opacity: '1.0',
+      }
+  }
+  if (feature.properties['light_hrs'] >= 3.94075 &&
+          feature.properties['light_hrs'] <= 7.8815) {
+
+      return {
+          color: '#fdb77a',
+          weight: '2',
+          dashArray: '',
+          lineCap: 'square',
+          lineJoin: 'bevel',
+          opacity: '1.0',
+      }
+  }
+  if (feature.properties['light_hrs'] >= 7.8815 &&
+          feature.properties['light_hrs'] <= 11.82225) {
+
+      return {
+          color: '#ec603f',
+          weight: '2',
+          dashArray: '',
+          lineCap: 'square',
+          lineJoin: 'bevel',
+          opacity: '1.0',
+      }
+  }
+  if (feature.properties['light_hrs'] >= 11.82225 &&
+          feature.properties['light_hrs'] <= 15.763) {
+
+      return {
+          color: '#b30000',
+          weight: '2',
+          dashArray: '',
+          lineCap: 'square',
+          lineJoin: 'bevel',
+          opacity: '1.0',
+      }
+  }
+  }
+
+  function styleElevators(feature) {
+  if (feature.properties['capacity'] >= 901000.0 &&
+          feature.properties['capacity'] <= 2059000.0) {
+
+      return {
+          radius: 2.0,
+          fillColor: '#f7fbff',
+          color: '#000000',
+          weight: .5,
+          fillOpacity: '1.0',
+          opacity: '1.0',
+          dashArray: ''
+      }
+  }
+
+  if (feature.properties['capacity'] >= 2059000.0 &&
+          feature.properties['capacity'] <= 3872000.0) {
+
+      return {
+          radius: 4.0,
+          fillColor: '#c8ddf0',
+          color: '#000000',
+          weight: .5,
+          fillOpacity: '1.0',
+          opacity: '1.0',
+          dashArray: ''
+      }
+  }
+
+  if (feature.properties['capacity'] >= 3872000.0 &&
+          feature.properties['capacity'] <= 6709000.0) {
+
+      return {
+          radius: 6.0,
+          fillColor: '#73b3d8',
+          color: '#000000',
+          weight: .5,
+          fillOpacity: '1.0',
+          opacity: '1.0',
+          dashArray: ''
+      }
+  }
+
+  if (feature.properties['capacity'] >= 6709000.0 &&
+          feature.properties['capacity'] <= 15245000.0) {
+
+      return {
+          radius: 8.0,
+          fillColor: '#2879b9',
+          color: '#000000',
+          weight: .5,
+          fillOpacity: '1.0',
+          opacity: '1.0',
+          dashArray: ''
+      }
+  }
+
+  if (feature.properties['capacity'] >= 15245000.0 &&
+          feature.properties['capacity'] <= 31258000.0) {
+
+      return {
+          radius: 10.0,
+          fillColor: '#08306b',
+          color: '#000000',
+          weight: .5,
+          fillOpacity: '1.0',
+          opacity: '1.0',
+          dashArray: ''
+      }
+  }
+
+  }
+
   var intermodalStyle = L.geoJson(intermodal_conn, {
       onEachFeature: onEachFeatureIntermodalConn
   });
 
   layerOrder[layerOrder.length] = intermodalStyle;
   feature_group.addLayer(intermodalStyle);
+
+  var truckcongestedhoursStyle = L.geoJson(truckcongestedhours, {
+      onEachFeature: onEachFeature,
+      style: styletruckcongestedhours
+
+  });
+
+  layerOrder[layerOrder.length] = truckcongestedhoursStyle;
+  feature_group.addLayer(truckcongestedhoursStyle);
+
+  var elevatorsStyle = L.geoJson(elevators, {
+      onEachFeature: onEachFeature,
+      style: styleElevators,
+      pointToLayer: function (feature, latlng) {
+          return L.circleMarker(latlng);
+          }
+
+  });
+
+  layerOrder[layerOrder.length] = elevatorsStyle;
+  feature_group.addLayer(elevatorsStyle);
+
 
   // function styleMilitary(feature) {
   //    console.log(sn);

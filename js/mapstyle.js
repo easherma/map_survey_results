@@ -104,7 +104,7 @@ var freight = new L.LayerGroup();
 var intermodal_legend = new L.LayerGroup();
 
 var submissions = new L.LayerGroup();
-
+var elevators = new L.LayerGroup();
 var majorports = new L.LayerGroup();
 var minorports = new L.LayerGroup();
 
@@ -160,6 +160,7 @@ var basemaps = {
 }
 
 var overlays = {
+"Submissions": submissions,
 // "labels": labelLayer,
 "Counties": countiesStyle,
 "Planning Agencies": rpaStyle,
@@ -168,9 +169,10 @@ var overlays = {
 "Military Bases": militaryStyle,
 "Urban Areas": urbanStyle,
 "National Highway Freight Network": freightStyle.addTo(map),
+"Truck Congested Hours": truckcongestedhoursStyle,
 "Intermodal Connectors": intermodalStyle,
 "Intermodal Facilities": intermodalpointsStyle,
-"Submissions": submissions,
+"Grain Elevators": elevatorsStyle,
 "Major Ports": majorports,
 "Minor Ports": minorports
 };
