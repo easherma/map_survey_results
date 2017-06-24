@@ -97,6 +97,10 @@ var mpo = new L.LayerGroup();
 
 var gai = new L.LayerGroup();
 
+var rail = new L.LayerGroup();
+
+var airports = new L.LayerGroup();
+
 var counts = new L.LayerGroup();
 
 var freight = new L.LayerGroup();
@@ -159,18 +163,63 @@ var basemaps = {
     // "labels" : labelLayer
 }
 
+var groupedOverlays = {
+  "Boundaries": {
+      "Counties": countiesStyle,
+      "Planning Agencies": rpaStyle,
+      "MPOs": mpo,
+    "Urban Areas": urbanStyle,
+  },
+  "Roads & Rail": {
+      "National Highway Freight Network": freightStyle.addTo(map),
+      "Truck Congested Hours": truckcongestedhoursStyle,
+      "Intermodal Connectors": intermodalStyle,
+      "Rail Lines": rail,
+
+  },
+  "Points of Interest": {
+      "Military Bases": militaryStyle,
+      "Airports": airports,
+      "Intermodal Facilities": intermodalpointsStyle,
+      "Major Ports": majorports,
+      "Minor Ports": minorports
+  },
+  "Economic": {
+      "Grain Elevators": elevatorsStyle,
+      'Sawmills': layer_ILsawmills2,
+      'Energy Data<br /><table><tr><td style="text-align: center;"><img src="legend/EnergyData1_BiodieselPlants0.png" /></td><td>Biodiesel Plants</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_CoalMines1.png" /></td><td>Coal Mines</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_CrudeOilRailTerminals2.png" /></td><td>Crude Oil Rail Terminals</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_EthanolPlants3.png" /></td><td>Ethanol Plants</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasHubs4.png" /></td><td>Natural Gas Hubs</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasProcessingPlant5.png" /></td><td>Natural Gas Processing Plant</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasUndergroundStorage6.png" /></td><td>Natural Gas Underground Storage</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_PetroleumRefineries7.png" /></td><td>Petroleum Refineries</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_PetroleumProductTerminals8.png" /></td><td>Petroleum Product Terminals</td></tr></table>'
+      : layer_EnergyData1,
+  },
+  "Submissions": {
+      "Submissions": submissions,
+  }
+
+};
+
+
+
+/*
+'IL_sawmills<br /><table><tr><td style="text-align: center;"><img src="legend/ILsawmills2_1M0.png" /></td><td><1 M</td></tr><tr><td style="text-align: center;"><img src="legend/ILsawmills2_16M1.png" /></td><td>> 16 M</td></tr><tr><td style="text-align: center;"><img src="legend/ILsawmills2_1216M2.png" /></td><td>12-16 M</td></tr><tr><td style="text-align: center;"><img src="legend/ILsawmills2_14M3.png" /></td><td>1-4 M</td></tr><tr><td style="text-align: center;"><img src="legend/ILsawmills2_48M4.png" /></td><td>4-8 M</td></tr><tr><td style="text-align: center;"><img src="legend/ILsawmills2_812M5.png" /></td><td>8-12 M</td></tr><tr><td style="text-align: center;"><img src="legend/ILsawmills2_Satellitelogyard6.png" /></td><td>Satellite log yard</td></tr><tr><td style="text-align: center;"><img src="legend/ILsawmills2_UNK7.png" /></td><td>UNK</td></tr></table>'
+
+'Energy Data<br /><table><tr><td style="text-align: center;"><img src="legend/EnergyData1_BiodieselPlants0.png" /></td><td>Biodiesel Plants</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_CoalMines1.png" /></td><td>Coal Mines</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_CrudeOilRailTerminals2.png" /></td><td>Crude Oil Rail Terminals</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_EthanolPlants3.png" /></td><td>Ethanol Plants</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasHubs4.png" /></td><td>Natural Gas Hubs</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasProcessingPlant5.png" /></td><td>Natural Gas Processing Plant</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasUndergroundStorage6.png" /></td><td>Natural Gas Underground Storage</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_PetroleumRefineries7.png" /></td><td>Petroleum Refineries</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_PetroleumProductTerminals8.png" /></td><td>Petroleum Product Terminals</td></tr></table>'
+*/
 var overlays = {
 "Submissions": submissions,
 // "labels": labelLayer,
+// "<h4>Boundaries</h4>": boundaries,
 "Counties": countiesStyle,
 "Planning Agencies": rpaStyle,
 "MPOs": mpo,
 // "gai features": gai,
-"Military Bases": militaryStyle,
-"Urban Areas": urbanStyle,
+// "<h4>Road & Rail</h4>": boundaries,
 "National Highway Freight Network": freightStyle.addTo(map),
 "Truck Congested Hours": truckcongestedhoursStyle,
 "Intermodal Connectors": intermodalStyle,
+"Rail Lines": rail,
+// "<h4>Points of Interest</h4>": boundaries,
+"Military Bases": militaryStyle,
+"Urban Areas": urbanStyle,
+"Airports": airports,
 "Intermodal Facilities": intermodalpointsStyle,
 "Grain Elevators": elevatorsStyle,
 "Major Ports": majorports,
@@ -215,6 +264,8 @@ majorPortQuery.run(function(error, featureCollection, response){
             }
     }).addTo(majorports);
 });
+
+
 
 var minorPortQuery = L.esri.query({
     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/Ports/MapServer/0',
@@ -265,10 +316,39 @@ mpo.bindPopup(function (layer) {
 //     layerDefs: {0: "STFIPS1='17'"}
 // }).addTo(urban);
 
-// var urban = L.esri.dynamicMapLayer({
-//     url: 'https://ags10s1.dot.illinois.gov/ArcGIS/rest/services/GAI/gai_functionalclass/MapServer/1',
-//     useCors: true
-// }).addTo(gai);
+var rail = L.esri.dynamicMapLayer({
+    url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/Railroad_Lines/MapServer',
+    useCors: false
+}).addTo(rail);
+
+var airports = L.esri.dynamicMapLayer({
+    url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/Airports/MapServer',
+    useCors: false
+}).addTo(airports);
+
+// var airportsQuery = L.esri.query({
+//     url: 'https://maps.bts.dot.gov/services/rest/services/NTAD/Airports/MapServer/0',
+//     useCors: false,
+//     pane: 'shadowPane',
+//     where: "StateAbbv ='IL'",
+//     // layerDefs: {0: "STFIPS='17'"}
+// });
+//
+// airportsQuery.within(bounds);
+//
+// airportsQuery.run(function(error, featureCollection, response){
+//     L.geoJSON(featureCollection , { onEachFeature: onEachFeature}).addTo(airports);
+// });
+
+
+
+airports.bindPopup(function (error, featureCollection) {
+  if(error || featureCollection.features.length === 0) {
+    return false;
+  } else {
+    return featureCollection.features[0].properties.FullName;
+  }
+});
 
 // L.esri.legendControl(ports).addTo(map);
 
@@ -284,7 +364,7 @@ mpo.bindPopup(function (layer) {
 
 
 
-var layerControl = new L.control.layers(basemaps, overlays, {collapsed:false}).addTo(map);
+var layerControl = new L.control.groupedLayers(basemaps, groupedOverlays, {collapsed:false}).addTo(map);
 layerControl.addTo(map);
 
 
@@ -328,3 +408,11 @@ searchControl.on('results', function(data){
     results.addLayer(L.marker(data.results[i].latlng).bindPopup(data.results[i].properties.Match_addr).openPopup());
   }
 });
+
+map.createPane('pane_EnergyData1');
+map.getPane('pane_EnergyData1').style.zIndex = 400;
+map.getPane('pane_EnergyData1').style['mix-blend-mode'] = 'normal';
+
+map.createPane('pane_ILsawmills2');
+map.getPane('pane_ILsawmills2').style.zIndex = 401;
+map.getPane('pane_ILsawmills2').style['mix-blend-mode'] = 'normal';

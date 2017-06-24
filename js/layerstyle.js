@@ -1,3 +1,7 @@
+
+
+        var bounds_group = new L.featureGroup([]);
+
 L.TopoJSON = L.GeoJSON.extend({
     addData: function (data) {
         var geojson, key;
@@ -505,3 +509,346 @@ feature_group.addLayer(countiesStyle);
   //     });
   // layerOrder[layerOrder.length] = json_bikefacilitiesJSON;
   // feature_group.addLayer(json_bikefacilitiesJSON);
+
+  function pop_EnergyData1(feature, layer) {
+      var popupContent = '<table>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['layer'] !== null ? Autolinker.link(String(feature.properties['layer'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+              </tr>\
+          </table>';
+      layer.bindPopup(popupContent);
+  }
+
+  function style_EnergyData1_0(feature) {
+      switch(feature.properties['layer']) {
+          case 'clipBiodiesel_Plants_US_201505v3':
+              return {
+          pane: 'pane_EnergyData1',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(127,201,127,1.0)',
+      }
+              break;
+          case 'clipCoalMines_US_2014_r3':
+              return {
+          pane: 'pane_EnergyData1',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(190,174,212,1.0)',
+      }
+              break;
+          case 'clipCrudeOil_RailTerminals_Nov2014':
+              return {
+          pane: 'pane_EnergyData1',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(253,192,134,1.0)',
+      }
+              break;
+          case 'clipEthanol_Plants_US_Aug2015v2':
+              return {
+          pane: 'pane_EnergyData1',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(255,255,153,1.0)',
+      }
+              break;
+          case 'clipNatura':
+              return {
+          pane: 'pane_EnergyData1',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(56,108,176,1.0)',
+      }
+              break;
+          case 'clipNaturalGas_ProcessingPlants_US_2014_v2':
+              return {
+          pane: 'pane_EnergyData1',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(240,2,127,1.0)',
+      }
+              break;
+          case 'clipNaturalGas_UndergroundStorage_US_201607':
+              return {
+          pane: 'pane_EnergyData1',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(191,91,23,1.0)',
+      }
+              break;
+          case 'clipPetroleum_Refineries_US_2016':
+              return {
+          pane: 'pane_EnergyData1',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(102,102,102,1.0)',
+      }
+              break;
+          case 'clipPetroleumProduct_Terminals_US_201608':
+              return {
+          pane: 'pane_EnergyData1',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(0,0,0,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(102,102,102,1.0)',
+      }
+              break;
+      }
+  }
+
+  var layer_EnergyData1 = new L.geoJson(json_EnergyData1, {
+      attribution: '<a href=""></a>',
+      pane: 'pane_EnergyData1',
+      onEachFeature: pop_EnergyData1,
+      pointToLayer: function (feature, latlng) {
+          var context = {
+              feature: feature,
+              variables: {}
+          };
+          return L.circleMarker(latlng, style_EnergyData1_0(feature))
+      },
+  });
+  feature_group.addLayer(layer_EnergyData1);
+  // map.addLayer(layer_EnergyData1);
+  function pop_ILsawmills2(feature, layer) {
+      var popupContent = '<table>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Id'] !== null ? Autolinker.link(String(feature.properties['Id'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Size'] !== null ? Autolinker.link(String(feature.properties['Size'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['address1'] !== null ? Autolinker.link(String(feature.properties['address1'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['address2'] !== null ? Autolinker.link(String(feature.properties['address2'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['owner'] !== null ? Autolinker.link(String(feature.properties['owner'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Mill_Statu'] !== null ? Autolinker.link(String(feature.properties['Mill_Statu'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['In_survey'] !== null ? Autolinker.link(String(feature.properties['In_survey'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Capacity'] !== null ? Autolinker.link(String(feature.properties['Capacity'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Mill_Type'] !== null ? Autolinker.link(String(feature.properties['Mill_Type'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Custom_saw'] !== null ? Autolinker.link(String(feature.properties['Custom_saw'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Urban_wood'] !== null ? Autolinker.link(String(feature.properties['Urban_wood'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Primary_pr'] !== null ? Autolinker.link(String(feature.properties['Primary_pr'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['Procuremen'] !== null ? Autolinker.link(String(feature.properties['Procuremen'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['County'] !== null ? Autolinker.link(String(feature.properties['County'])) : '') + '</td>\
+              </tr>\
+              <tr>\
+                  <td colspan="2">' + (feature.properties['species'] !== null ? Autolinker.link(String(feature.properties['species'])) : '') + '</td>\
+              </tr>\
+          </table>';
+      layer.bindPopup(popupContent);
+  }
+
+  function style_ILsawmills2_0(feature) {
+      switch(feature.properties['Capacity']) {
+          case '<1 M':
+              return {
+          pane: 'pane_ILsawmills2',
+          radius: 2.0,
+          opacity: 1,
+          color: 'rgba(43,83,54,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(247,251,255,1.0)',
+      }
+              break;
+          case '> 16 M':
+              return {
+          pane: 'pane_ILsawmills2',
+          radius: 4.0,
+          opacity: 1,
+          color: 'rgba(43,83,54,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(225,243,179,1.0)',
+      }
+              break;
+          case '12-16 M':
+              return {
+          pane: 'pane_ILsawmills2',
+          radius: 6.0,
+          opacity: 1,
+          color: 'rgba(43,83,54,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(194,230,153,1.0)',
+      }
+              break;
+          case '1-4 M':
+              return {
+          pane: 'pane_ILsawmills2',
+          radius: 8.0,
+          opacity: 1,
+          color: 'rgba(43,83,54,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(157,214,137,1.0)',
+      }
+              break;
+          case '4-8 M':
+              return {
+          pane: 'pane_ILsawmills2',
+          radius: 10.0,
+          opacity: 1,
+          color: 'rgba(43,83,54,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(120,198,121,1.0)',
+      }
+              break;
+          case '8-12 M':
+              return {
+          pane: 'pane_ILsawmills2',
+          radius: 12.0,
+          opacity: 1,
+          color: 'rgba(43,83,54,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(84,181,102,1.0)',
+      }
+              break;
+          case 'Satellite log yard':
+              return {
+          pane: 'pane_ILsawmills2',
+          radius: 2.0,
+          opacity: 1,
+          color: 'rgba(43,83,54,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(247,251,255,1.0)',
+      }
+              break;
+          case 'UNK':
+              return {
+          pane: 'pane_ILsawmills2',
+          radius: 2.0,
+          opacity: 1,
+          color: 'rgba(43,83,54,1.0)',
+          dashArray: '',
+          lineCap: 'butt',
+          lineJoin: 'miter',
+          weight: 1,
+          fillOpacity: 1,
+          fillColor: 'rgba(247,251,255,1.0)',
+      }
+              break;
+      }
+  }
+
+  var layer_ILsawmills2 = new L.geoJson(json_ILsawmills2, {
+      attribution: '<a href=""></a>',
+      pane: 'pane_ILsawmills2',
+      onEachFeature: pop_ILsawmills2,
+      pointToLayer: function (feature, latlng) {
+          var context = {
+              feature: feature,
+              variables: {}
+          };
+          return L.circleMarker(latlng, style_ILsawmills2_0(feature))
+      },
+  });
+  feature_group.addLayer(layer_ILsawmills2);
+  // map.addLayer(layer_ILsawmills2);
