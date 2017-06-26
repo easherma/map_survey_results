@@ -182,7 +182,8 @@ var groupedOverlays = {
       "Airports": airports,
       "Intermodal Facilities": intermodalpointsStyle,
       "Major Ports": majorports,
-      "Minor Ports": minorports
+      "Minor Ports": minorports,
+      "Transloads": transloadsStyle,
   },
   "Economic": {
       "Grain Elevators": elevatorsStyle,

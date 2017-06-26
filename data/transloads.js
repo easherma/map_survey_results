@@ -1,0 +1,31 @@
+var transloads = {
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Foodliner Inc", "Address": "415 Green St, Bensenville IL 60131", "Lat": 41.953261, "Lng": -87.93307 }, "geometry": { "type": "Point", "coordinates": [ -87.93307, 41.95326 ] } },
+{ "type": "Feature", "properties": { "Name": "G&D Trucking Inc", "Address": "26062 SW Frontage Rd, Channahon IL 60410", "Lat": 41.4075676, "Lng": -88.1938712 }, "geometry": { "type": "Point", "coordinates": [ -88.19387, 41.40757 ] } },
+{ "type": "Feature", "properties": { "Name": "Calumet Container Corp", "Address": "12158 S Stony Island Ave, Chicago IL 60633", "Lat": 41.6694177, "Lng": -87.5760663 }, "geometry": { "type": "Point", "coordinates": [ -87.57607, 41.66942 ] } },
+{ "type": "Feature", "properties": { "Name": "Carry Transit", "Address": "7830 W 71st St, Chicago (Bridgeview) IL 60455", "Lat": 41.7624044, "Lng": -87.8146269 }, "geometry": { "type": "Point", "coordinates": [ -87.81463, 41.7624 ] } },
+{ "type": "Feature", "properties": { "Name": "Carry Transit", "Address": "1702 ½ East 103rd St, Chicago IL 60617 ", "Lat": 41.7077483, "Lng": -87.5823238 }, "geometry": { "type": "Point", "coordinates": [ -87.58232, 41.70775 ] } },
+{ "type": "Feature", "properties": { "Name": "Carry Transit (Argo)", "Address": "7749 W 63rd St, Chicago (Summit) IL 60501", "Lat": 41.777031, "Lng": -87.8147055 }, "geometry": { "type": "Point", "coordinates": [ -87.81471, 41.77703 ] } },
+{ "type": "Feature", "properties": { "Name": "Foodliner Inc", "Address": "11861 S Cottage Grove Ave, Chicago IL 60628", "Lat": 41.677664, "Lng": -87.607715 }, "geometry": { "type": "Point", "coordinates": [ -87.60771, 41.67766 ] } },
+{ "type": "Feature", "properties": { "Name": "Foodliner Inc\/Quest Liner", "Address": "118th & Torrance Ave, Chicago IL", "Lat": 41.6821513, "Lng": -87.5373659 }, "geometry": { "type": "Point", "coordinates": [ -87.53737, 41.68215 ] } },
+{ "type": "Feature", "properties": { "Name": "Norfolk Southern TBT", "Address": "1702 1\/2 E 103 St, Chicago IL 60617", "Lat": 41.7114361, "Lng": -87.5828375 }, "geometry": { "type": "Point", "coordinates": [ -87.58284, 41.71144 ] } },
+{ "type": "Feature", "properties": { "Name": "Bulkmatic Transport Co", "Address": "2351 State St, Chicago Heights IL 60411", "Lat": 41.4934348, "Lng": -87.6124583 }, "geometry": { "type": "Point", "coordinates": [ -87.61246, 41.49343 ] } },
+{ "type": "Feature", "properties": { "Name": "G&D Trucking Inc", "Address": "7500 Reed Rd, Coal City IL 60416", "Lat": 41.2593251, "Lng": -88.2642171 }, "geometry": { "type": "Point", "coordinates": [ -88.26422, 41.25933 ] } },
+{ "type": "Feature", "properties": { "Name": "Southern Illinois Motor Xpress", "Address": "1967 Pyatt-Cutler Rd, Cutler IL 62238", "Lat": 37.9978296, "Lng": -89.5061475 }, "geometry": { "type": "Point", "coordinates": [ -89.50615, 37.99783 ] } },
+{ "type": "Feature", "properties": { "Name": "Ee-Jay Motor Transports Inc", "Address": "1501 Lincoln Ave, East St Louis IL 62204", "Lat": 38.6347428, "Lng": -90.126969 }, "geometry": { "type": "Point", "coordinates": [ -90.12697, 38.63474 ] } },
+{ "type": "Feature", "properties": { "Name": "Quality Transload", "Address": "East St Louis IL", "Lat": 38.624514, "Lng": -90.1506465 }, "geometry": { "type": "Point", "coordinates": [ -90.15065, 38.62451 ] } },
+{ "type": "Feature", "properties": { "Name": "Morton Warehousing LLC", "Address": "Evansville IL", "Lat": 38.0903289, "Lng": -89.9384406 }, "geometry": { "type": "Point", "coordinates": [ -89.93844, 38.09033 ] } },
+{ "type": "Feature", "properties": { "Name": "Carry Transit", "Address": "9500 W Fullerton Ave, Franklin Park IL 60131", "Lat": 41.9223795, "Lng": -87.8609273 }, "geometry": { "type": "Point", "coordinates": [ -87.86093, 41.92238 ] } },
+{ "type": "Feature", "properties": { "Name": "CN CargoFlo", "Address": "16750 S Center St, Harvey IL 60426", "Lat": 41.5849118, "Lng": -87.6462714 }, "geometry": { "type": "Point", "coordinates": [ -87.64627, 41.58491 ] } },
+{ "type": "Feature", "properties": { "Name": "Bulkmatic Transport Co", "Address": "7000 Santa Fe Dr, Hodgkins (Chicago) IL 60525", "Lat": 41.7614509, "Lng": -87.8607508 }, "geometry": { "type": "Point", "coordinates": [ -87.86075, 41.76145 ] } },
+{ "type": "Feature", "properties": { "Name": "Foodliner Inc", "Address": "7000 Santa Fe Dr, Hodgkins IL 60525", "Lat": 41.7614509, "Lng": -87.8607508 }, "geometry": { "type": "Point", "coordinates": [ -87.86075, 41.76145 ] } },
+{ "type": "Feature", "properties": { "Name": "3 Rivers Terminal, Div of Seeler Industries", "Address": "One Genstar Dr, Joliet IL 60435", "Lat": 41.5556031, "Lng": -88.0839339 }, "geometry": { "type": "Point", "coordinates": [ -88.08393, 41.5556 ] } },
+{ "type": "Feature", "properties": { "Name": "Midwest Bulk Transload", "Address": "1 Genstar Ln, Joliet IL 60435", "Lat": 41.5556031, "Lng": -88.0839339 }, "geometry": { "type": "Point", "coordinates": [ -88.08393, 41.5556 ] } },
+{ "type": "Feature", "properties": { "Name": "A&R Transport Inc", "Address": "8440 S Tabler Rd, Morris IL 60450", "Lat": 41.4098849, "Lng": -88.3179836 }, "geometry": { "type": "Point", "coordinates": [ -88.31798, 41.40988 ] } },
+{ "type": "Feature", "properties": { "Name": "Fort Transfer", "Address": "225 S Maple, Morton IL 61550", "Lat": 40.614212, "Lng": -89.4697939 }, "geometry": { "type": "Point", "coordinates": [ -89.46979, 40.61421 ] } },
+{ "type": "Feature", "properties": { "Name": "Luckey Logistics LLC", "Address": "29988 N 00 East Rd, Streator IL 61364", "Lat": 41.0586813, "Lng": -88.9306588 }, "geometry": { "type": "Point", "coordinates": [ -88.93066, 41.05868 ] } },
+{ "type": "Feature", "properties": { "Name": "G&D Trucking Inc", "Address": "649 N Ardmore, Villa Park IL 60181", "Lat": 41.9024526, "Lng": -87.9771584 }, "geometry": { "type": "Point", "coordinates": [ -87.97716, 41.90245 ] } }
+]
+}

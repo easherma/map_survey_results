@@ -92,6 +92,15 @@ var majorPortMarkerOptions = {
     fillOpacity: 0.8
 };
 
+var transloadMarkerOptions = {
+    radius: 5,
+    fillColor: "#a2e4e6",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
 function onEachFeatureFreight(feature, layer) {
     // if (feature.properties && feature.properties.name)
     {
@@ -452,63 +461,25 @@ var countiesStyle = new L.geoJson(counties, {
 layerOrder[layerOrder.length] = countiesStyle;
 feature_group.addLayer(countiesStyle);
 
+// var transloadsStyle = new L.geoJson(transloads, {
+//     onEachFeature: onEachFeature,
+//     pointToLayer: function (feature, latlng) {
+//         return L.circleMarker(latlng);
+//         }
+// });
+//
+// layerOrder[layerOrder.length] = transloadsStyle;
+// feature_group.addLayer(transloadsStyle);
 
-  //
-  //
-  // function doStylebikefacilities(feature) {
-  //         if (feature.properties.BikeFacili >= 1.0 &&
-  //                 feature.properties.BikeFacili <= 1.8) {
-  //
-  //             return {
-  //                 color: '#006837',
-  //                 weight: '3.44',
-  //                 opacity: '1.0',
-  //             }
-  //         }
-  //         if (feature.properties.BikeFacili >= 1.8 &&
-  //                 feature.properties.BikeFacili <= 2.6) {
-  //
-  //             return {
-  //                 color: '#984ea3',
-  //                 weight: '3.44',
-  //                 opacity: '1.0',
-  //             }
-  //         }
-  //         if (feature.properties.BikeFacili >= 2.6 &&
-  //                 feature.properties.BikeFacili <= 3.4) {
-  //
-  //             return {
-  //                 color: '#78c679',
-  //                 weight: '3.44',
-  //                 opacity: '1.0',
-  //             }
-  //         }
-  //         if (feature.properties.BikeFacili >= 3.4 &&
-  //                 feature.properties.BikeFacili <= 4.2) {
-  //
-  //             return {
-  //                 color: '#c2e699',
-  //                 weight: '3.44',
-  //                 opacity: '1.0',
-  //             }
-  //         }
-  //         if (feature.properties.BikeFacili >= 4.2 &&
-  //                 feature.properties.BikeFacili <= 5.0) {
-  //
-  //             return {
-  //                 color: '#ffff99',
-  //                 weight: '3.44',
-  //                 opacity: '1.0',
-  //             }
-  //         }
-  // }
-  //     var json_bikefacilitiesJSON = new L.geoJson(json_bikefacilitiesexp, {
-  //         style: doStylebikefacilities
-  //         ,clickable :false
-  //         ,pane: 'shadowPane'
-  //     });
-  // layerOrder[layerOrder.length] = json_bikefacilitiesJSON;
-  // feature_group.addLayer(json_bikefacilitiesJSON);
+var transloadsStyle = L.geoJson(transloads, {
+    onEachFeature: onEachFeature,
+    pointToLayer: function (feature, latlng) {
+  return L.circleMarker(latlng, transloadMarkerOptions);
+}
+});
+
+layerOrder[layerOrder.length] = transloadsStyle;
+feature_group.addLayer(transloadsStyle);
 
   function pop_EnergyData1(feature, layer) {
       var popupContent = '<table>\
