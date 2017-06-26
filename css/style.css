@@ -51,6 +51,23 @@ tr:nth-child(even) {
   font-size :medium;
 }
 
+#contextBar {
+    z-index: 1000;
+  font-size: medium;
+  background-color: white;
+  max-width: 650px;
+  max-height: 400px;
+  overflow: auto;
+
+}
+
+/*details {
+    display: block;
+    max-width: 650px;
+    max-height: 400px;
+    overflow: auto;
+}*/
+
 
 #add-route {
     display:inline-block;

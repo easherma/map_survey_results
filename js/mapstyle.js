@@ -66,6 +66,43 @@ function restackLayers() {
 
 		leftBar.addTo(map);
 
+        //Adding the left Bar of icons as a leaflet control panel
+        // var contextBar = L.control({position: 'topleft'});
+
+        //Inspiration: http://stackoverflow.com/a/25764322/4047679
+        //More insiration: http://stackoverflow.com/questions/18673860/defining-a-html-template-to-append-using-jquery
+
+        var contextTemplate = $('#context-template').html();
+
+        // contextBar.onAdd = function(map){
+        //     var div =L.DomUtil.create('div', '');
+        //     div.id = 'contextBar';
+        //     div.innerHTML = contextTemplate;
+        //     div.style.backgroundColor = 'white';
+        //     return div;
+        // };
+        //
+        // contextBar.addTo(map);
+
+        L.Control.ContextInfo = L.Control.extend({
+            onAdd: function(map){
+                var div =L.DomUtil.create('div', '');
+                div.id = 'contextBar';
+                div.innerHTML = contextTemplate;
+                // div.style.backgroundColor = 'white';
+                return div;
+            },
+            onRemove: function(map) {
+                //nothing
+            }
+        });
+
+        L.control.contextInfo = function(opts) {
+            return new L.Control.ContextInfo(opts);
+        }
+
+        L.control.contextInfo({position:'topleft'}).addTo(map);
+
 
 		//Adding layer of labels
 		var labelLayer = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_only_labels/{z}/{x}/{y}.png', {
