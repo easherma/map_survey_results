@@ -145,7 +145,7 @@ function onEachFeatureRpa(feature, layer) {
     // if (feature.properties && feature.properties.name)
     {
         var popupContent = '<table>';
-            popupContent += '<tr><td>' + "" + ':</td><td><b>' + feature.properties['rpa'] + '</b></td></tr>';
+            popupContent += '<tr><td>' + "" + '</td><td><b>' + feature.properties['rpa'] + '</b></td></tr>';
         popupContent += '</table>';
         layer.bindPopup(popupContent);
 
@@ -404,12 +404,12 @@ function onEachFeatureRpa(feature, layer) {
 
       onEachFeature: onEachFeatureRpa,
       style: {
-          color: '#999999',
-          weight: '2',
+          color: '#343434',
+          weight: '2.5',
           opacity: '.5',
 
       },
-      interactive :true,
+      interactive:true,
       pane: 'shadowPane',
   });
 
