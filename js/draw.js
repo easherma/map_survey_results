@@ -205,7 +205,7 @@
       sql += ","+enteredEmail;
       sql += ","+enteredOrgname+");";
 
-//        console.log(sql); //For testing
+       console.log(sql); //For testing
 
 $.ajax({
   type: 'POST',
@@ -229,7 +229,7 @@ $.ajax({
 
   },
   error: function (responseData, textStatus, errorThrown) {
-    //   console.log(data);
+      console.log(data);
       console.log(responseData);
       console.log("Problem saving the data to django");
   }
