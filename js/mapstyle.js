@@ -204,7 +204,7 @@ var groupedOverlays = {
   "Boundaries": {
       "Counties": countiesStyle,
       "Planning Agencies": rpaStyle,
-      "MPOs": mpo,
+      "MPOs": mpoStyle,
     "Urban Areas": urbanStyle,
   },
   "Roads & Rail": {

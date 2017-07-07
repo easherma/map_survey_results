@@ -416,6 +416,22 @@ function onEachFeatureRpa(feature, layer) {
   layerOrder[layerOrder.length] = rpaStyle;
   feature_group.addLayer(rpaStyle);
 
+  var mpoStyle = L.geoJson(mpo, {
+
+      onEachFeature: onEachFeatureMPO,
+      style: {
+          color: '#343434',
+          weight: '2.5',
+          opacity: '.5',
+
+      },
+      interactive:true,
+      pane: 'shadowPane',
+  });
+
+  layerOrder[layerOrder.length] = mpoStyle;
+  feature_group.addLayer(mpoStyle);
+
 var selected
 
   var freightStyle = new L.TopoJSON(nhfn, {
