@@ -136,9 +136,12 @@
       var drawing = "";
         if(routeDraw){
             var submittedLine = currentLine.polyline.toGeoJSON();
+		console.log(submittedLine);
             submittedGeom = submittedLine.geometry;
+		
 
             drawing = "'"+JSON.stringify(submittedLine.geometry)+"'";
+		console.log(drawing);
 
             //To ensure that drawn routes remain on map after saving, with popup.
 
@@ -229,7 +232,6 @@ $.ajax({
 
   },
   error: function (responseData, textStatus, errorThrown) {
-      console.log(data);
       console.log(responseData);
       console.log("Problem saving the data to django");
   }
