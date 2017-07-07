@@ -36,7 +36,7 @@ $.ajax({
 
 var sql_statement='select the_geom, description, email, name, org, insert_time from bikeways';
 
-old query for carto
+// old query for carto
 
   $.getJSON('https://easherma.carto.com/api/v2/sql/?format=GeoJSON&q='+sql_statement, function(data) {
 L.geoJson(data).addTo(map);
