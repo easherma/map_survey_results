@@ -51,8 +51,11 @@ var sql_statement="select the_geom, description, email, name, org, insert_time f
       console.log("Data retrived");
       console.log(responseData);
       var submissionsStyle = L.geoJson(responseData, {
-          onEachFeature: onEachFeature
-      })
+          style: function (feature) {
+    return {color: get_random_color()};
+},
+          onEachFeature: onEachFeatureSubmissions
+      });
       layerOrder[layerOrder.length] = submissionsStyle;
       feature_group.addLayer(submissionsStyle).addTo(submissions);
 

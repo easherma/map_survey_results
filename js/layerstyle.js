@@ -1,4 +1,13 @@
-
+function get_random_color()
+{
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ )
+    {
+       color += letters[Math.round(Math.random() * 15)];
+    }
+return color;
+}
 
         var bounds_group = new L.featureGroup([]);
 
@@ -42,6 +51,21 @@ function onEachFeature(feature, layer) {
         layer.bindPopup(popupContent, {maxWidth: 300, minWidth: 250, maxHeight: 160, autoPan: true, closeButton: true, autoPanPadding: [5, 5]});
     }
 }
+
+function onEachFeatureSubmissions(feature, layer) {
+    if (feature.properties )
+    {
+        var popupContent = '<table >';
+        for (var p in feature.properties) {
+            popupContent += '<tr><td>' + p + ':</td><td><b>' + feature.properties[p] + '</b></td></tr>';
+        }
+        popupContent += '</table>';
+        layer.bindPopup(popupContent, {maxWidth: 300, minWidth: 250, maxHeight: 160, autoPan: true, closeButton: true, autoPanPadding: [5, 5]});
+        
+    }
+}
+
+
 
 function onEachFeatureMPO(feature, layer) {
     if (feature.properties)
