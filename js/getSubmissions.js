@@ -34,7 +34,7 @@ $.ajax({
 });
 
 
-var sql_statement='select the_geom, description, email, name, org, insert_time from bikeways';
+var sql_statement="select the_geom, description, email, name, org, insert_time from bikeways where name != 'test'";
 
 // old query for carto
 

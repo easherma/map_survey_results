@@ -47,7 +47,7 @@ function onEachFeatureMPO(feature, layer) {
     if (feature.properties)
     {
         var popupContent = '<table>';
-        popupContent += '<tr><td>' + "" + '</td><td><b>' + feature.properties['MPONAME'] + '</b></td></tr>';
+        popupContent += '<tr><td>' + "" + '</td><td><b>' + feature.properties['MPO_NAME'] + '</b></td></tr>';
         popupContent += '</table>';
         layer.bindPopup(popupContent);
     }
@@ -202,7 +202,7 @@ function onEachFeatureRpa(feature, layer) {
 
       return {
           color: '#fef0d9',
-          weight: '2',
+          weight: '2.5',
           dashArray: '',
           lineCap: 'square',
           lineJoin: 'bevel',
@@ -214,7 +214,7 @@ function onEachFeatureRpa(feature, layer) {
 
       return {
           color: '#fdb77a',
-          weight: '2',
+          weight: '2.5',
           dashArray: '',
           lineCap: 'square',
           lineJoin: 'bevel',
@@ -226,7 +226,7 @@ function onEachFeatureRpa(feature, layer) {
 
       return {
           color: '#ec603f',
-          weight: '2',
+          weight: '2.5',
           dashArray: '',
           lineCap: 'square',
           lineJoin: 'bevel',
@@ -238,7 +238,7 @@ function onEachFeatureRpa(feature, layer) {
 
       return {
           color: '#b30000',
-          weight: '2',
+          weight: '2.5',
           dashArray: '',
           lineCap: 'square',
           lineJoin: 'bevel',
@@ -327,7 +327,7 @@ function onEachFeatureRpa(feature, layer) {
   layerOrder[layerOrder.length] = intermodalStyle;
   feature_group.addLayer(intermodalStyle);
 
-  var truckcongestedhoursStyle = L.geoJson(truckcongestedhours, {
+  var truckcongestedhoursStyle = new L.TopoJSON(truckcongestedhours, {
       onEachFeature: onEachFeature,
       style: styletruckcongestedhours
 

@@ -136,6 +136,8 @@ var gai = new L.LayerGroup();
 
 var rail = new L.LayerGroup();
 
+var ez = new L.LayerGroup();
+
 var airports = new L.LayerGroup();
 
 var counts = new L.LayerGroup();
@@ -179,6 +181,30 @@ where: "STATE='IL'",
 pane: 'shadowPane'
 }).addTo(intermodal_legend);
 
+// var ez_layer = L.esri.featureLayer({
+// url: 'http://geoservices.revenue.illinois.gov/ags/rest/services/EXT/EZ2_T/MapServer/0',
+// pane: 'shadowPane'
+// }).addTo(ez);
+
+var ez_layer = L.esri.tiledMapLayer({
+  url: "http://geoservices.revenue.illinois.gov/ags/rest/services/EXT/EZ2_T/MapServer"
+}).addTo(ez);
+
+// var ez_layer = L.esri.dynamicMapLayer({
+//     url: 'http://geoservices.revenue.illinois.gov/ags/rest/services/EXT/EZ2_T/MapServer/0',
+//     useCors: false
+// }).addTo(ez);
+
+// L.esri.dynamicMapLayer({
+// url: 'http://geoservices.revenue.illinois.gov/ags/rest/services/EXT/EZ2_D/MapServer/',
+// opacity: 0.7,
+// useCors: false,
+// simplifyFactor: 1,
+//
+// precision: 5,
+// layers: [0,1]
+// }).addTo(ez);
+
 var intermodalPopup = "<p>{NAME}<br></p><table><tr><th>Type</th><th>Mode Type</th><th>Association</th></tr><tr><td>{TYPE}</td><td>{MODE_TYPE}</td><td>{ASSOC}</td></tr></table>"
 intermodal.bindPopup(function (layer) {
   return L.Util.template(intermodalPopup, layer.feature.properties);
@@ -206,10 +232,11 @@ var groupedOverlays = {
       "Planning Agencies": rpaStyle,
       "MPOs": mpoStyle,
     "Urban Areas": urbanStyle,
+    "Enterprize Zones": ez,
   },
   "Roads & Rail": {
       "National Highway Freight Network": freightStyle.addTo(map),
-      "Truck Congested Hours": truckcongestedhoursStyle,
+      "Truck Congested Hours": truckcongestedhoursStyle.addTo(map),
       "Intermodal Connectors": intermodalStyle,
       "Rail Lines": rail,
 
@@ -225,7 +252,7 @@ var groupedOverlays = {
   "Economic": {
       "Grain Elevators": elevatorsStyle,
       'Sawmills': layer_ILsawmills2,
-      'Energy Data<br /><table><tr><td style="text-align: center;"><img src="legend/EnergyData1_BiodieselPlants0.png" /></td><td>Biodiesel Plants</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_CoalMines1.png" /></td><td>Coal Mines</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_CrudeOilRailTerminals2.png" /></td><td>Crude Oil Rail Terminals</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_EthanolPlants3.png" /></td><td>Ethanol Plants</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasHubs4.png" /></td><td>Natural Gas Hubs</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasProcessingPlant5.png" /></td><td>Natural Gas Processing Plant</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasUndergroundStorage6.png" /></td><td>Natural Gas Underground Storage</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_PetroleumRefineries7.png" /></td><td>Petroleum Refineries</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_PetroleumProductTerminals8.png" /></td><td>Petroleum Product Terminals</td></tr></table>'
+      'Energy Data<table><tr><td style="text-align: center;"><img src="legend/EnergyData1_BiodieselPlants0.png" /></td><td>Biodiesel Plants</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_CoalMines1.png" /></td><td>Coal Mines</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_CrudeOilRailTerminals2.png" /></td><td>Crude Oil Rail Terminals</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_EthanolPlants3.png" /></td><td>Ethanol Plants</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasHubs4.png" /></td><td>Natural Gas Hubs</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasProcessingPlant5.png" /></td><td>Natural Gas Processing Plant</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_NaturalGasUndergroundStorage6.png" /></td><td>Natural Gas Underground Storage</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_PetroleumRefineries7.png" /></td><td>Petroleum Refineries</td></tr><tr><td style="text-align: center;"><img src="legend/EnergyData1_PetroleumProductTerminals8.png" /></td><td>Petroleum Product Terminals</td></tr></table>'
       : layer_EnergyData1,
   },
   "Submissions": {
@@ -251,7 +278,7 @@ var overlays = {
 // "gai features": gai,
 // "<h4>Road & Rail</h4>": boundaries,
 "National Highway Freight Network": freightStyle.addTo(map),
-"Truck Congested Hours": truckcongestedhoursStyle,
+"Truck Congested Hours": truckcongestedhoursStyle.addTo(map),
 "Intermodal Connectors": intermodalStyle,
 "Rail Lines": rail,
 // "<h4>Points of Interest</h4>": boundaries,
