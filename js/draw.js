@@ -138,7 +138,7 @@
             var submittedLine = currentLine.polyline.toGeoJSON();
 		console.log(submittedLine);
             submittedGeom = submittedLine.geometry;
-		
+
 
             drawing = "'"+JSON.stringify(submittedLine.geometry)+"'";
 		console.log(drawing);
@@ -217,7 +217,7 @@ $.ajax({
   data:
   // submission
   {
-        'geom': drawing,
+        'geom': JSON.stringify(submittedGeom),
         'description': description.value,
         'name': username.value,
         'email': email.value,
