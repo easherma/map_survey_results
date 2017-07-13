@@ -10,28 +10,28 @@
 //   })
 //
 
-$.ajax({
-  type: 'GET',
-  url: 'https://api.osgisomg.com/api/data/',
-  crossDomain: true,
-  // data: {"q":sql_statement},
-  dataType: 'json',
-  contentType: 'application/json; charset=utf-8',
-  success: function(responseData, textStatus, jqXHR) {
-    console.log("Submissions retrived");
-    console.log(JSON.stringify(responseData));
-    var submissionsStyle = L.geoJson(responseData, {
-        onEachFeature: onEachFeature
-    })
-    layerOrder[layerOrder.length] = submissionsStyle;
-    feature_group.addLayer(submissionsStyle).addTo(submissions);
-
-  },
-  error: function (responseData, textStatus, errorThrown) {
-      console.log(JSON.stringify(responseData));
-      console.log("Problem retriving submissions");
-  }
-});
+// $.ajax({
+//   type: 'GET',
+//   url: 'https://api.osgisomg.com/api/data/',
+//   crossDomain: true,
+//   // data: {"q":sql_statement},
+//   dataType: 'json',
+//   contentType: 'application/json; charset=utf-8',
+//   success: function(responseData, textStatus, jqXHR) {
+//     console.log("Submissions retrived");
+//     console.log(JSON.stringify(responseData));
+//     var submissionsStyle = L.geoJson(responseData, {
+//         onEachFeature: onEachFeature
+//     })
+//     layerOrder[layerOrder.length] = submissionsStyle;
+//     feature_group.addLayer(submissionsStyle).addTo(submissions);
+//
+//   },
+//   error: function (responseData, textStatus, errorThrown) {
+//       console.log(JSON.stringify(responseData));
+//       console.log("Problem retriving submissions");
+//   }
+// });
 
 
 var sql_statement="select the_geom, description, email, name, org, insert_time from bikeways where name != 'test'";
