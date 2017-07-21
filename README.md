@@ -1,5 +1,7 @@
-# Bikeways for Everybody
-Crowd-sourcing lines on a map to solicit public input on ideal locations for fully protected bike routes as part of the [Boston Cyclists' Union's Bikeways for Everybody initiative](http://bostoncyclistsunion.org/bikeways-for-everybody/). See the live site [here](https://boston-cyclists-union.github.io/bikeways4everybody/)
+# Map-based Survey Tool
+Crowd-sourcing lines on a map to solicit public input to highlight roadway sections as well as points of interest. Forked and heavily modified from [this project](https://boston-cyclists-union.github.io/bikeways4everybody/).
+
+This project consists of a frontend interface for mapping. It can be used to POST data to a [backend](https://github.com/easherma/map-survey) via a REST API. Alternativley, data can be sent to a [Carto](https://cartodb.com/signup) account and be hosted there. 
 
 # How to Fork
 
