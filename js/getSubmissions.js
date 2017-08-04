@@ -37,6 +37,7 @@ $.ajax({
   error: function (responseData, textStatus, errorThrown) {
       console.log(JSON.stringify(responseData));
       console.log("Problem retriving submissions");
+      console.log(errorThrown);
   }
 });
 
